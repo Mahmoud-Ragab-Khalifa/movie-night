@@ -4,13 +4,15 @@ import SearchBar from "./SearchBar";
 
 const Header = () => {
   return (
-    <header className="py-4">
+    <header className="sticky z-50 top-0 left-0 w-full py-5">
       <div className="container flex items-center justify-between">
         <Logo />
 
         <Navbar />
 
-        <SearchBar />
+        <div className="hidden md:block">
+          <SearchBar />
+        </div>
       </div>
     </header>
   );

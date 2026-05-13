@@ -9,9 +9,9 @@ const denkFont = Denk_One({
 const Logo = () => {
   return (
     <Link href={"/"} className={`${denkFont.className} text-3xl md:text-4xl`}>
-      <span className="text-purple-500">Movie</span>
+      <span className="text-primary">Movie</span>
       <span className="text-white ps-0.75">Night</span>
-      <span className="text-purple-500 ps-0.75 text-xs animate-pulse">.HD</span>
+      <span className="text-primary ps-0.75 text-xs animate-pulse">.HD</span>
     </Link>
   );
 };
