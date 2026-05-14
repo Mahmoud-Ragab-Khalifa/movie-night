@@ -5,7 +5,7 @@ import { navigationLinks } from "@/constants/navigationLinks";
 import { Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 
-const Navbar = () => {
+const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
@@ -33,7 +33,7 @@ const Navbar = () => {
     <nav>
       {/* Desktop Navigation Links */}
 
-      <div className="hidden md:flex items-center gap-1 glass rounded-full px-2 py-1">
+      <div className="hidden lg:flex items-center gap-1 glass rounded-full px-2 py-1">
         {navigationLinks.map((item) => (
           <a
             key={item.href}
@@ -48,7 +48,7 @@ const Navbar = () => {
       {/* Mobile Navigation Links */}
 
       <button
-        className="md:hidden cursor-pointer p-2 text-foreground bg-surface rounded-full"
+        className="lg:hidden cursor-pointer p-2 text-foreground bg-surface rounded-full"
         onClick={() => setIsMobileMenuOpen((prev) => !prev)}
       >
         {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -56,7 +56,7 @@ const Navbar = () => {
 
       {isMobileMenuOpen && (
         <div
-          className="md:hidden absolute top-full left-0 w-full glass-strong py-6 animate-fade-in-lg"
+          className="lg:hidden absolute top-full left-0 w-full glass-strong py-6 animate-fade-in-lg"
           ref={mobileMenuRef}
         >
           <div className="container grid gap-4">
@@ -71,7 +71,7 @@ const Navbar = () => {
               </a>
             ))}
 
-            <SearchBar />
+            {withSearchBar && <SearchBar />}
           </div>
         </div>
       )}

@@ -13,7 +13,7 @@ const SearchBar = () => {
         name="search"
         id="search"
         placeholder="Search Movies..."
-        className="w-full md:w-50 ring-2 ring-muted md:ring-0 glass py-2 px-4 rounded-full transition-all duration-300 md:focus:w-64 focus:outline-none caret-primary text-sm focus:ring-2 focus:ring-primary/80 focus:shadow-md focus:shadow-primary"
+        className="w-full sm:w-50 ring-2 ring-muted sm:ring-0 glass py-2 px-4 rounded-full transition-all duration-300 sm:focus:w-64 focus:outline-none caret-primary text-sm focus:ring-2 focus:ring-primary/80 focus:shadow-md focus:shadow-primary"
         value={searchedMovie}
         onChange={(e) => setSearchedMovie(e.target.value)}
       />

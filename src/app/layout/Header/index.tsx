@@ -28,9 +28,19 @@ const Header = () => {
       <div className="container flex items-center justify-between">
         <Logo />
 
-        <Navbar />
+        <div className="hidden sm:block lg:hidden">
+          <SearchBar />
+        </div>
 
-        <div className="hidden md:block">
+        <div className="sm:hidden">
+          <Navbar withSearchBar={true} />
+        </div>
+
+        <div className="hidden sm:block">
+          <Navbar withSearchBar={false} />
+        </div>
+
+        <div className="hidden lg:block">
           <SearchBar />
         </div>
       </div>
