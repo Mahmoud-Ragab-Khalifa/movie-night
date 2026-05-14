@@ -2,6 +2,7 @@
 
 import { Movie } from "@/types/tmdb";
 import { useEffect, useState } from "react";
+import MovieContent from "./MovieContent";
 
 const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -21,6 +22,12 @@ const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
     return () => clearInterval(interval);
   }, [images.length]);
 
+  const currentMovie = featuredMovies.find(
+    (movie) =>
+      `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}` ===
+      images[currentImage],
+  );
+
   return (
     <section
       className="min-h-screen pt-19.5 md:pt-20 lg:pt-21.5 bg-cover bg-center bg-no-repeat relative transition-all duration-500 ease-in-out"
@@ -31,7 +38,9 @@ const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-full">
-        <div className="container">Movie Content</div>
+        <div className="container flex justify-center md:justify-start">
+          <MovieContent movie={currentMovie!} />
+        </div>
       </div>
 
       {/* Dots */}
