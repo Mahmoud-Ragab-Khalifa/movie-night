@@ -1,17 +1,17 @@
 "use client";
 
+import { Movie } from "@/types/tmdb";
 import { useEffect, useState } from "react";
 
-const images = [
-  "https://image.tmdb.org/t/p/original/8YFL5QQVPy3AgrEQxNYVSgiPEbe.jpg",
-  "https://image.tmdb.org/t/p/original/9nhjGaFLKtddDPtPaX5EmKqsWdH.jpg",
-  "https://image.tmdb.org/t/p/original/rthMuZfFv4fqEU4JVbgSW9wQ8rs.jpg",
-  "https://image.tmdb.org/t/p/original/b9UCfDzwiWw7mIFsIQR9ZJUeh7q.jpg",
-  "https://image.tmdb.org/t/p/original/l33oR0mnvf20avWyIMxW02EtQxn.jpg",
-];
-
-const Hero = () => {
+const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
   const [currentImage, setCurrentImage] = useState(0);
+
+  const featuredMovies = trendingMovies.slice(0, 5);
+
+  const images = featuredMovies.map(
+    (movie) =>
+      `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}`,
+  );
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -19,7 +19,7 @@ const Hero = () => {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <section
