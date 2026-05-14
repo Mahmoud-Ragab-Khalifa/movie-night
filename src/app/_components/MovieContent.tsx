@@ -4,9 +4,12 @@ import { PlayCircle, Plus, Star } from "lucide-react";
 
 const MovieContent = ({ movie }: { movie: Movie }) => {
   return (
-    <div>
-      <div className="flex items-center gap-2.5">
-        <Button size="sm" className="p-1! text-xs uppercase">
+    <>
+      <div className="flex items-center gap-2.5 justify-center md:justify-start">
+        <Button
+          size="sm"
+          className="p-1! text-xs uppercase rounded-full! md:rounded-md!"
+        >
           Trending
         </Button>
 
@@ -25,15 +28,15 @@ const MovieContent = ({ movie }: { movie: Movie }) => {
         </span>
       </div>
 
-      <h1 className="text-4xl md:text-6xl font-bold my-4 md:max-w-3xl md:leading-18">
+      <h1 className="text-4xl md:text-6xl font-bold my-4 md:max-w-3xl md:leading-18 text-center md:text-start">
         {movie?.title}
       </h1>
 
-      <p className="text-base md:text-lg md:max-w-2xl line-clamp-3 md:line-clamp-4 mb-8 text-neutral-300">
+      <p className="text-base md:text-lg md:max-w-2xl line-clamp-3 md:line-clamp-4 mb-8 text-neutral-300 text-center md:text-start">
         {movie?.overview}
       </p>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 justify-center md:justify-start">
         <Button size="sm">
           <PlayCircle size={18} />
           <span>Watch Now</span>
@@ -41,13 +44,13 @@ const MovieContent = ({ movie }: { movie: Movie }) => {
 
         <Button
           size="sm"
-          className="bg-secondary shadow-none ring ring-neutral-600 hover:bg-muted!"
+          className="bg-secondary shadow-none ring-neutral-600! hover:bg-muted!"
         >
           <Plus size={18} />
           <span>Show More Info</span>
         </Button>
       </div>
-    </div>
+    </>
   );
 };
 

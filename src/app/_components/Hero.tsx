@@ -38,7 +38,7 @@ const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-full">
-        <div className="container flex justify-center md:justify-start">
+        <div className="container">
           <MovieContent movie={currentMovie!} />
         </div>
       </div>
