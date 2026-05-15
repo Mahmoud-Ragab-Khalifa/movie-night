@@ -26,14 +26,14 @@ const MoviesSlider = ({ movies }: { movies: Movie[] }) => {
     <div className="mt-8 md:mt-10 relative">
       {/* Navigation Buttons */}
       <button
-        className="fully-rounded-btn bg-secondary text-primary md:text-primary/70 transition-all duration-300 hover:md:text-primary absolute left-2 z-50 top-1/2 -translate-y-1/2"
+        className="hidden md:flex fully-rounded-btn bg-secondary text-primary md:text-primary/70 transition-all duration-300 hover:md:text-primary absolute left-2 z-50 top-1/2 -translate-y-1/2"
         onClick={scrollLeft}
       >
         <ChevronLeft size={20} strokeWidth={3} />
       </button>
 
       <button
-        className="fully-rounded-btn bg-secondary text-primary md:text-primary/70 transition-all duration-300 hover:md:text-primary absolute right-2 z-50 top-1/2 -translate-y-1/2"
+        className="hidden md:flex fully-rounded-btn bg-secondary text-primary md:text-primary/70 transition-all duration-300 hover:md:text-primary absolute right-2 z-50 top-1/2 -translate-y-1/2"
         onClick={scrollRight}
       >
         <ChevronRight size={20} strokeWidth={3} />
