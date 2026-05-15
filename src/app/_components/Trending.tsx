@@ -4,7 +4,7 @@ import { Movie } from "@/types/tmdb";
 
 const Trending = ({ movies }: { movies: Movie[] }) => {
   return (
-    <section className="section-gap relative">
+    <section className="section-gap relative" id="trending">
       <div className="container relative z-50">
         <MainHeader
           title="Trending This Week"

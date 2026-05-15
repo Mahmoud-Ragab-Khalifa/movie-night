@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { navigationLinks } from "@/constants/navigationLinks";
 import { Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
@@ -47,6 +48,13 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
     };
   }, []);
 
+  // Handle Clicking on Home Navigation Link To Work As scroll to top
+
+  const pathname = usePathname();
+  const router = useRouter();
+
+  console.log(pathname);
+
   return (
     <nav>
       {/* Desktop Navigation Links */}
@@ -57,6 +65,11 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
             key={item.href}
             href={item.href}
             className={`${hash === item.href ? "text-foreground" : "text-muted-foreground"} px-4 py-2 text-sm transition-all duration-300 hover:text-foreground hover:bg-surface rounded-full relative`}
+            onClick={() =>
+              (item.href === "#home" &&
+                window.scrollTo({ top: 0, behavior: "smooth" })) ||
+              (item.href === "#home" && pathname !== "/" && router.push("/"))
+            }
           >
             {item.label}
 
