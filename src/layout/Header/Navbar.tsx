@@ -53,8 +53,6 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  console.log(pathname);
-
   return (
     <nav>
       {/* Desktop Navigation Links */}
