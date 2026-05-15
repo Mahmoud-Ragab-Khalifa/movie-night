@@ -8,7 +8,11 @@ const denkFont = Denk_One({
 
 const Logo = () => {
   return (
-    <Link href={"/"} className={`${denkFont.className} text-3xl md:text-4xl`}>
+    <Link
+      href={"/"}
+      className={`${denkFont.className} text-3xl md:text-4xl`}
+      onClick={() => (window.location.hash = "#home")}
+    >
       <span className="text-primary">Movie</span>
       <span className="text-white ps-0.75">Night</span>
       <span className="text-primary ps-0.75 text-xs animate-pulse">.HD</span>

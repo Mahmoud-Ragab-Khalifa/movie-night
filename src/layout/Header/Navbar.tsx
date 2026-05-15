@@ -29,6 +29,24 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
     };
   }, [isMobileMenuOpen]);
 
+  // Handle Navigation Links Active State
+
+  const [hash, setHash] = useState("#home");
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setHash(window.location.hash === "" ? "#home" : window.location.hash);
+    };
+
+    handleHashChange();
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, []);
+
   return (
     <nav>
       {/* Desktop Navigation Links */}
@@ -38,9 +56,13 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
           <a
             key={item.href}
             href={item.href}
-            className="px-4 py-2 text-sm transition-all duration-300 text-muted-foreground hover:text-foreground hover:bg-surface rounded-full"
+            className={`${hash === item.href ? "text-foreground" : "text-muted-foreground"} px-4 py-2 text-sm transition-all duration-300 hover:text-foreground hover:bg-surface rounded-full relative`}
           >
             {item.label}
+
+            {hash === item.href && (
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-3/5 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
+            )}
           </a>
         ))}
       </div>
@@ -65,9 +87,13 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="text-lg text-muted-foreground active:text-foreground hover:text-foreground transition-colors duration-300 py-2 nth-[1]:pt-0"
+                className={`${hash === item.href ? "text-foreground" : "text-muted-foreground"} text-lg active:text-foreground hover:text-foreground transition-colors duration-300 py-2 nth-[1]:pt-0 relative`}
               >
                 {item.label}
+
+                {hash === item.href && (
+                  <div className="absolute left-0 bottom-0 w-15 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
+                )}
               </a>
             ))}
 
