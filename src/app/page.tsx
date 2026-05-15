@@ -9,7 +9,7 @@ const HomePage = async () => {
     <main>
       <Hero trendingMovies={trendingMovies} />
 
-      <Trending />
+      <Trending movies={trendingMovies} />
     </main>
   );
 };

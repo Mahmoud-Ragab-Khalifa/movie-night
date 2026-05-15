@@ -1,10 +1,8 @@
 import MainHeader from "@/components/MainHeader";
 import MoviesSlider from "@/components/MoviesSlider";
-import { getTrendingMovies } from "@/services/api";
+import { Movie } from "@/types/tmdb";
 
-const Trending = async () => {
-  const trendingMovies = await getTrendingMovies();
-
+const Trending = ({ movies }: { movies: Movie[] }) => {
   return (
     <section className="section-gap relative">
       <div className="container relative z-50">
@@ -13,7 +11,7 @@ const Trending = async () => {
           description="Stay Updated With What Everyone's Watching"
         />
 
-        <MoviesSlider movies={trendingMovies} />
+        <MoviesSlider movies={movies} />
       </div>
     </section>
   );
