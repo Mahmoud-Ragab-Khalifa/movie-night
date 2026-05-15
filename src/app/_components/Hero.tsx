@@ -3,15 +3,19 @@
 import { Movie } from "@/types/tmdb";
 import { useEffect, useState } from "react";
 import MovieContent from "./MovieContent";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+
   const [currentImage, setCurrentImage] = useState(0);
 
   const featuredMovies = trendingMovies.slice(0, 5);
 
-  const images = featuredMovies.map(
-    (movie) =>
-      `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}`,
+  const images = featuredMovies.map((movie) =>
+    isMobile
+      ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`
+      : `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}`,
   );
 
   useEffect(() => {
@@ -22,11 +26,7 @@ const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const currentMovie = featuredMovies.find(
-    (movie) =>
-      `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}` ===
-      images[currentImage],
-  );
+  const currentMovie = trendingMovies[currentImage];
 
   return (
     <section
