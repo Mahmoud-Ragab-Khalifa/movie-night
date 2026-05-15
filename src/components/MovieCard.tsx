@@ -6,7 +6,7 @@ import { Movie } from "@/types/tmdb";
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
     <div className="grid gap-2.5">
-      <div className="min-w-60 md:min-w-70 overflow-hidden rounded-lg snap-start relative group">
+      <div className="w-60 xl:w-70 overflow-hidden rounded-lg snap-start relative group">
         {/* Image */}
         <div className="relative aspect-2/3">
           <Image
@@ -49,7 +49,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
 
       {/* Footer Info */}
       <div className="hidden md:block px-1.5">
-        <p className="mb-0.5 text-sm font-medium overflow-hidden max-w-55 md:max-w-65 truncate">
+        <p className="mb-0.5 text-sm font-medium overflow-hidden max-w-55 xl:max-w-65 truncate">
           {movie?.title}
         </p>
 

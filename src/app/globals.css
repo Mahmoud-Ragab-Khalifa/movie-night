@@ -38,7 +38,7 @@ body {
   }
 
   .section-gap {
-    @apply py-8 md:py-16;
+    @apply pt-8 md:pt-16;
   }
 
   .glass {
