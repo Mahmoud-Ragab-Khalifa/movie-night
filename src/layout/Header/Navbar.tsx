@@ -33,7 +33,7 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
     <nav>
       {/* Desktop Navigation Links */}
 
-      <div className="hidden lg:flex items-center gap-1 glass rounded-full px-2 py-1">
+      <div className="hidden lg:flex items-center gap-1 glass rounded-full px-2 py-1 ring-2 ring-muted shadow-lg shadow-surface">
         {navigationLinks.map((item) => (
           <a
             key={item.href}
@@ -48,7 +48,7 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
       {/* Mobile Navigation Links */}
 
       <button
-        className="lg:hidden cursor-pointer p-2 text-foreground bg-surface rounded-full"
+        className="lg:hidden cursor-pointer p-2 text-foreground glass rounded-full ring-2 ring-muted shadow-lg shadow-surface"
         onClick={() => setIsMobileMenuOpen((prev) => !prev)}
       >
         {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}

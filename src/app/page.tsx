@@ -6,7 +6,7 @@ const HomePage = async () => {
   const trendingMovies = await getTrendingMovies();
 
   return (
-    <main>
+    <main className="bg-linear-to-b from-black via-black/30 to-black/90 relative">
       <Hero trendingMovies={trendingMovies} />
 
       <Trending movies={trendingMovies} />
