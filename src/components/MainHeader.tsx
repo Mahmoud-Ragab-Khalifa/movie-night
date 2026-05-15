@@ -7,9 +7,13 @@ const MainHeader = ({
 }) => {
   return (
     <div>
-      <h2 className="font-bold text-2xl md:text-3xl">{title}</h2>
+      <h2 className="font-semibold md:font-bold text-xl md:text-2xl">
+        {title}
+      </h2>
 
-      <p className="font-bold text-sm md:text-base mt-2">{description}</p>
+      <p className="font-bold text-xs md:text-sm mt-1 md:mt-1.5">
+        {description}
+      </p>
     </div>
   );
 };

@@ -52,6 +52,10 @@ body {
     backdrop-filter: blur(24px);
     border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent);
   }
+
+  .fully-rounded-btn {
+    @apply w-8 h-8 rounded-full flex items-center justify-center cursor-pointer;
+  }
 }
 
 /* ANIMATIONS  */

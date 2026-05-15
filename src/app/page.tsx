@@ -1,5 +1,6 @@
 import { getTrendingMovies } from "@/services/api";
 import Hero from "./_components/Hero";
+import Trending from "./_components/Trending";
 
 const HomePage = async () => {
   const trendingMovies = await getTrendingMovies();
@@ -7,6 +8,8 @@ const HomePage = async () => {
   return (
     <main>
       <Hero trendingMovies={trendingMovies} />
+
+      <Trending />
     </main>
   );
 };
