@@ -34,6 +34,10 @@ export const getPopularMovies = async () => {
         accept: "application/json",
         Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
       },
+      next: {
+        tags: ["popular-movies"],
+        revalidate: 3600,
+      },
     },
   );
 
