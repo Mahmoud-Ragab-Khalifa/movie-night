@@ -30,7 +30,7 @@ const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
 
   return (
     <section
-      className="min-h-screen pt-19.5 md:pt-20 lg:pt-21.5 bg-cover bg-center bg-no-repeat relative transition-all duration-500 ease-in-out"
+      className="h-screen max-h-screen pt-19.5 md:pt-20 lg:pt-21.5 bg-cover bg-center bg-no-repeat relative transition-all duration-500 ease-in-out"
       style={{
         backgroundImage: `url(${images[currentImage]})`,
       }}
