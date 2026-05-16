@@ -53,6 +53,13 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const handleClickToHomeLink = (href: string) => {
+    return (
+      (href === "#home" && window.scrollTo({ top: 0, behavior: "smooth" })) ||
+      (href === "#home" && pathname !== "/" && router.push("/"))
+    );
+  };
+
   return (
     <nav>
       {/* Desktop Navigation Links */}
@@ -63,11 +70,7 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
             key={item.href}
             href={item.href}
             className={`${hash === item.href ? "text-foreground" : "text-muted-foreground"} px-4 py-2 text-sm transition-all duration-300 hover:text-foreground hover:bg-surface rounded-full relative`}
-            onClick={() =>
-              (item.href === "#home" &&
-                window.scrollTo({ top: 0, behavior: "smooth" })) ||
-              (item.href === "#home" && pathname !== "/" && router.push("/"))
-            }
+            onClick={() => handleClickToHomeLink(item.href)}
           >
             {item.label}
 
@@ -97,7 +100,10 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
               <a
                 key={item.href}
                 href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleClickToHomeLink(item.href);
+                }}
                 className={`${hash === item.href ? "text-foreground" : "text-muted-foreground"} text-lg active:text-foreground hover:text-foreground transition-colors duration-300 py-2 nth-[1]:pt-0 relative`}
               >
                 {item.label}
