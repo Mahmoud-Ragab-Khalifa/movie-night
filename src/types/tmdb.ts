@@ -22,3 +22,12 @@ export type TmdbResponse = {
   total_pages: number;
   total_results: number;
 };
+
+export type Genre = {
+  id: number;
+  name: string;
+};
+
+export type GenresResponse = {
+  genres: Genre[];
+};
