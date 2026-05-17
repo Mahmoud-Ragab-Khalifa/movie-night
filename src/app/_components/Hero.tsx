@@ -4,6 +4,7 @@ import { Movie } from "@/types/tmdb";
 import { useEffect, useState } from "react";
 import MovieContent from "./MovieContent";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import Image from "next/image";
 
 const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -26,15 +27,21 @@ const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
     return () => clearInterval(interval);
   }, [images.length]);
 
-  const currentMovie = trendingMovies[currentImage];
+  const currentMovie: Movie = trendingMovies[currentImage];
 
   return (
-    <section
-      className="h-screen max-h-screen pt-19.5 md:pt-20 lg:pt-21.5 bg-cover bg-center bg-no-repeat relative transition-all duration-500 ease-in-out"
-      style={{
-        backgroundImage: `url(${images[currentImage]})`,
-      }}
-    >
+    <section className="h-screen max-h-screen pt-19.5 md:pt-20 lg:pt-21.5 bg-cover bg-center bg-no-repeat relative transition-all duration-500 ease-in-out">
+      <div className="absolute inset-0">
+        <Image
+          src={images[currentImage]}
+          alt={currentMovie.title}
+          fill
+          className="object-cover object-center"
+          sizes="100vw"
+          priority={currentImage === 0}
+        />
+      </div>
+
       <div className="absolute inset-0 bg-black/50" />
 
       <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-full">
