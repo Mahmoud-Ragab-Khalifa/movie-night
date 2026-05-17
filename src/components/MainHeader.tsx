@@ -6,7 +6,7 @@ const MainHeader = ({
   description: string;
 }) => {
   return (
-    <div>
+    <div className="relative py-2.5">
       <h2 className="font-semibold md:font-bold text-xl md:text-2xl">
         {title}
       </h2>
@@ -14,6 +14,8 @@ const MainHeader = ({
       <p className="font-bold text-xs md:text-sm mt-1 md:mt-1.5">
         {description}
       </p>
+
+      <div className="absolute bottom-0 left-0 w-1/2 h-1 rounded-full bg-linear-to-r from-primary via-primary/70 to-transparent shadow-2xl shadow-primary" />
     </div>
   );
 };
