@@ -3,6 +3,7 @@ import Hero from "./_components/Hero";
 import Trending from "./_components/Trending";
 import Popular from "./_components/Popular";
 import TopRated from "./_components/TopRated";
+import BrowseByGenre from "./_components/BrowseByGenre";
 
 const HomePage = async () => {
   const trendingMovies = await getTrendingMovies();
@@ -14,6 +15,8 @@ const HomePage = async () => {
       <Trending movies={trendingMovies} />
 
       <Popular />
+
+      <BrowseByGenre />
 
       <TopRated />
     </main>
