@@ -99,3 +99,28 @@ export const getMoviesGenres = async () => {
 
   return moviesGenre.genres ?? [];
 };
+
+export const getMoviesByGenre = async (genreId: number) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/discover/movie?with_genres=${genreId}&sort_by=popularity.desc&page=1`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["movies-by-genre"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.error("Failed To Get Movies By Genre");
+  }
+
+  const moviesByGenre: TmdbResponse = await response.json();
+
+  return moviesByGenre.results ?? [];
+};
