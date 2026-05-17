@@ -49,3 +49,28 @@ export const getPopularMovies = async () => {
 
   return popularMovies.results ?? [];
 };
+
+export const getTopRatedMovies = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/movie/top_rated`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["top-rated-movies"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.error("Failed To Get Top Rated Movies");
+  }
+
+  const topRatedMovies: TmdbResponse = await response.json();
+
+  return topRatedMovies.results ?? [];
+};
