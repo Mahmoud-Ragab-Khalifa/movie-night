@@ -1,3 +1,5 @@
+"use client";
+
 import { Denk_One } from "next/font/google";
 import Link from "next/link";
 
