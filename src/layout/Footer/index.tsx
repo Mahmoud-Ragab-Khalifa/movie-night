@@ -56,7 +56,7 @@ const Footer = () => {
 
       {/* Copy Rights */}
       <div className="container">
-        <div className="flex items-center justify-between pt-4 mt-10 border-t border-t-muted text-muted-foreground text-xs">
+        <div className="flex flex-col md:flex-row gap-2.5 items-start md:items-center md:justify-between pt-4 mt-6 md:mt-10 border-t border-t-muted text-muted-foreground text-xs">
           <div>
             @{date.getFullYear()}{" "}
             <span className="italic font-semibold text-primary">
