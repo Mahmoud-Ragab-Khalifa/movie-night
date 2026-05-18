@@ -1,9 +1,9 @@
 import { Genre, Movie } from "@/types/tmdb";
-import MoviesGenres from "./MoviesGenres";
 import MoviesSlider from "@/components/MoviesSlider";
 import { getMoviesByGenre } from "@/services/api";
+import MoviesGenres from "./MoviesGenres";
 
-const BrowseByGenre = async ({
+const BrowseByGenreSection = async ({
   moviesGenres,
   genreId,
 }: {
@@ -27,4 +27,4 @@ const BrowseByGenre = async ({
   );
 };
 
-export default BrowseByGenre;
+export default BrowseByGenreSection;

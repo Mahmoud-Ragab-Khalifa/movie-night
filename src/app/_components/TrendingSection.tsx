@@ -2,7 +2,7 @@ import MainHeader from "@/components/MainHeader";
 import MoviesSlider from "@/components/MoviesSlider";
 import { Movie } from "@/types/tmdb";
 
-const Trending = ({ movies }: { movies: Movie[] }) => {
+const TrendingSection = ({ movies }: { movies: Movie[] }) => {
   return (
     <section className="section-gap relative" id="trending">
       <div className="container relative z-50">
@@ -17,4 +17,4 @@ const Trending = ({ movies }: { movies: Movie[] }) => {
   );
 };
 
-export default Trending;
+export default TrendingSection;

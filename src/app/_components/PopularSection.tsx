@@ -3,7 +3,7 @@ import MoviesSlider from "@/components/MoviesSlider";
 import { getPopularMovies } from "@/services/api";
 import { Movie } from "@/types/tmdb";
 
-const Popular = async () => {
+const PopularSection = async () => {
   const popularMovies: Movie[] = await getPopularMovies();
 
   return (
@@ -20,4 +20,4 @@ const Popular = async () => {
   );
 };
 
-export default Popular;
+export default PopularSection;

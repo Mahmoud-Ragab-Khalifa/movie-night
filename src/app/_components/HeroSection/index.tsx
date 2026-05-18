@@ -2,11 +2,11 @@
 
 import { Movie } from "@/types/tmdb";
 import { useEffect, useState } from "react";
-import MovieContent from "./MovieContent";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Image from "next/image";
+import MovieContent from "./MovieContent";
 
-const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
+const HeroSection = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -68,4 +68,4 @@ const Hero = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
   );
 };
 
-export default Hero;
+export default HeroSection;
