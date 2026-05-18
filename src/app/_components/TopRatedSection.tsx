@@ -7,7 +7,7 @@ const TopRatedSection = async () => {
   const topRatedMovies: Movie[] = await getTopRatedMovies();
 
   return (
-    <section className="section-gap relative" id="top-rated">
+    <section className="section-gap pb-8 md:pb-16 relative" id="top-rated">
       <div className="container relative z-50">
         <MainHeader
           title="Top Rated Movies"
