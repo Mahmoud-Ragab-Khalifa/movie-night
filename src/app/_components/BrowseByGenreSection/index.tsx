@@ -19,7 +19,13 @@ const BrowseByGenreSection = async ({
           Browse By Genre
         </h2>
 
-        <MoviesGenres genres={moviesGenres} />
+        <MoviesGenres
+          genres={moviesGenres}
+          activeGenre={
+            moviesGenres.find((genre) => genre.id === +genreId) ??
+            moviesGenres[0]
+          }
+        />
 
         <MoviesSlider movies={moviesByGenre} />
       </div>

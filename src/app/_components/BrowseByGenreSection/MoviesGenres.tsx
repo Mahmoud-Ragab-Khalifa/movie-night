@@ -5,8 +5,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
-const MoviesGenres = ({ genres }: { genres: Genre[] }) => {
-  const [selectedGenre, setSelectedGenre] = useState<Genre>(genres[0]);
+const MoviesGenres = ({
+  genres,
+  activeGenre,
+}: {
+  genres: Genre[];
+  activeGenre: Genre;
+}) => {
+  const [selectedGenre, setSelectedGenre] = useState<Genre>(activeGenre);
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
