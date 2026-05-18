@@ -36,7 +36,12 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
 
   useEffect(() => {
     const handleHashChange = () => {
-      setHash(window.location.hash === "" ? "#home" : window.location.hash);
+      setHash(
+        window.location.hash === "" ||
+          window.location.hash === "#browse-by-genre"
+          ? "#home"
+          : window.location.hash,
+      );
     };
 
     handleHashChange();
