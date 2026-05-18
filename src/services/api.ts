@@ -1,4 +1,4 @@
-import { GenresResponse, TmdbResponse } from "@/types/tmdb";
+import { GenresResponse, MovieDetails, TmdbResponse } from "@/types/tmdb";
 
 export const getTrendingMovies = async () => {
   const response = await fetch(
@@ -123,4 +123,29 @@ export const getMoviesByGenre = async (genreId: number) => {
   const moviesByGenre: TmdbResponse = await response.json();
 
   return moviesByGenre.results ?? [];
+};
+
+export const getMovieDetails = async (id: number) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["movie-details"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.error("Failed To Get Movie Details");
+  }
+
+  const movieDetails: MovieDetails = await response.json();
+
+  return movieDetails ?? {};
 };
