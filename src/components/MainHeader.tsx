@@ -15,7 +15,7 @@ const MainHeader = ({
         {description}
       </p>
 
-      <div className="absolute bottom-0 left-0 w-1/2 h-1 rounded-full bg-linear-to-r from-primary via-primary/70 to-transparent shadow-2xl shadow-primary" />
+      <div className="absolute bottom-0 left-0 w-1/2 md:w-1/4 h-1 rounded-full bg-linear-to-r from-primary via-primary/70 to-transparent shadow-2xl shadow-primary" />
     </div>
   );
 };
