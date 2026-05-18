@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -32,6 +33,8 @@ export default function RootLayout({
         {children}
 
         <Footer />
+
+        <ScrollToTop />
       </body>
     </html>
   );
