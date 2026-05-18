@@ -13,7 +13,7 @@ const BrowseByGenreSection = async ({
   const moviesByGenre: Movie[] = await getMoviesByGenre(+genreId);
 
   return (
-    <section className="section-gap relative">
+    <section className="section-gap relative" id="browse-by-genre">
       <div className="container relative z-50">
         <h2 className="font-semibold md:font-bold text-xl md:text-2xl pt-2.5">
           Browse By Genre
