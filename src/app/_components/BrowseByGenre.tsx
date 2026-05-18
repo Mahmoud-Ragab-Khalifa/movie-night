@@ -1,10 +1,14 @@
-import { getMoviesGenres } from "@/services/api";
 import { Genre } from "@/types/tmdb";
 import MoviesGenres from "./MoviesGenres";
+import DesktopMoviesByGenre from "./DesktopMoviesByGenre";
 
-const BrowseByGenre = async () => {
-  const moviesGenres: Genre[] = await getMoviesGenres();
-
+const BrowseByGenre = async ({
+  moviesGenres,
+  genreId,
+}: {
+  moviesGenres: Genre[];
+  genreId: string;
+}) => {
   return (
     <section className="section-gap relative">
       <div className="container relative z-50">
@@ -13,6 +17,8 @@ const BrowseByGenre = async () => {
         </h2>
 
         <MoviesGenres genres={moviesGenres} />
+
+        <DesktopMoviesByGenre genreId={genreId} />
       </div>
     </section>
   );

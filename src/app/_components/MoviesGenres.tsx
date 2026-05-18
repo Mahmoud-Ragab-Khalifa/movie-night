@@ -2,6 +2,7 @@
 
 import { Genre } from "@/types/tmdb";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 
 const MoviesGenres = ({ genres }: { genres: Genre[] }) => {
@@ -23,6 +24,8 @@ const MoviesGenres = ({ genres }: { genres: Genre[] }) => {
     });
   };
 
+  const router = useRouter();
+
   return (
     <div
       className="flex gap-2 items-center overflow-x-scroll no-scrollbar my-5"
@@ -31,7 +34,12 @@ const MoviesGenres = ({ genres }: { genres: Genre[] }) => {
       {genres.map((genre) => (
         <button
           key={genre.id}
-          onClick={() => setSelectedGenre(genre)}
+          onClick={() => {
+            setSelectedGenre(genre);
+            router.replace(`/?genreId=${genre.id.toString()}`, {
+              scroll: false,
+            });
+          }}
           className={`whitespace-nowrap text-sm rounded-full py-1 px-3 transition-all duration-300 cursor-pointer hover:bg-primary hover:text-white active:scale-110
             ${selectedGenre.id === genre.id ? "bg-primary text-white shadow-2xl shadow-fuchsia-500" : "bg-secondary text-neutral-300"}`}
         >
