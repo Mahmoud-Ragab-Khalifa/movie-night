@@ -1,3 +1,7 @@
+import { getMovieDetails } from "@/services/api";
+import MovieDetails from "./_components/MovieDetails";
+import Image from "next/image";
+
 const MovieDetailsPage = async ({
   params,
 }: {
@@ -5,12 +9,28 @@ const MovieDetailsPage = async ({
 }) => {
   const { id } = await params;
 
-  console.log(id);
+  const movie = await getMovieDetails(id);
 
   return (
-    <main className="pt-19.5 md:pt-20 lg:pt-21.5 bg-linear-to-b from-black/20 via-black/60 to-black/90">
+    <main className="bg-linear-to-b from-black/20 via-black/90 to-black">
       <section className="section-gap pb-8 md:pb-16">
-        <div className="container"></div>
+        {/* Hero Image */}
+        <div className="absolute inset-0 h-[50vh] -z-10">
+          <Image
+            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}`}
+            alt={movie.title}
+            fill
+            className="object-cover object-top"
+            sizes="100vw"
+            priority={false}
+          />
+
+          <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/60 to-black" />
+        </div>
+
+        <div className="container pt-50 md:pt-70 relative">
+          <MovieDetails movie={movie} />
+        </div>
       </section>
     </main>
   );
