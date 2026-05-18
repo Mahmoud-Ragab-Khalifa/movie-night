@@ -1,6 +1,7 @@
-import { Genre } from "@/types/tmdb";
+import { Genre, Movie } from "@/types/tmdb";
 import MoviesGenres from "./MoviesGenres";
-import DesktopMoviesByGenre from "./DesktopMoviesByGenre";
+import MoviesSlider from "@/components/MoviesSlider";
+import { getMoviesByGenre } from "@/services/api";
 
 const BrowseByGenre = async ({
   moviesGenres,
@@ -9,6 +10,8 @@ const BrowseByGenre = async ({
   moviesGenres: Genre[];
   genreId: string;
 }) => {
+  const moviesByGenre: Movie[] = await getMoviesByGenre(+genreId);
+
   return (
     <section className="section-gap relative">
       <div className="container relative z-50">
@@ -18,7 +21,7 @@ const BrowseByGenre = async ({
 
         <MoviesGenres genres={moviesGenres} />
 
-        <DesktopMoviesByGenre genreId={genreId} />
+        <MoviesSlider movies={moviesByGenre} />
       </div>
     </section>
   );
