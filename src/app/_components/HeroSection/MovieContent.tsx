@@ -5,7 +5,7 @@ import { PlayCircle, Plus, Star } from "lucide-react";
 const MovieContent = ({ movie }: { movie: Movie }) => {
   return (
     <>
-      <div className="flex items-center gap-2.5 justify-center md:justify-start">
+      <div className="flex items-center gap-2.5 justify-center md:justify-start animate-fade-in-lg">
         <Button
           size="sm"
           className="p-1! text-xs uppercase rounded-full! md:rounded-md!"
@@ -28,15 +28,15 @@ const MovieContent = ({ movie }: { movie: Movie }) => {
         </span>
       </div>
 
-      <h1 className="text-4xl md:text-6xl font-bold my-4 md:max-w-3xl md:leading-18 text-center md:text-start">
+      <h1 className="text-4xl md:text-6xl font-bold my-4 md:max-w-3xl md:leading-18 text-center md:text-start animate-fade-in-lg animation-delay-300">
         {movie?.title}
       </h1>
 
-      <p className="text-base md:text-lg md:max-w-2xl line-clamp-3 md:line-clamp-4 mb-8 text-neutral-300 text-center md:text-start">
+      <p className="text-base md:text-lg md:max-w-2xl line-clamp-3 md:line-clamp-4 mb-8 text-neutral-300 text-center md:text-start animate-fade-in-lg animation-delay-500">
         {movie?.overview}
       </p>
 
-      <div className="flex items-center gap-4 justify-center md:justify-start">
+      <div className="flex items-center gap-4 justify-center md:justify-start animate-fade-in-lg animation-delay-800">
         <Button size="sm">
           <PlayCircle size={18} />
           <span>Watch Now</span>

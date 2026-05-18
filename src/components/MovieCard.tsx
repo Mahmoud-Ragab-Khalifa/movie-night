@@ -5,7 +5,7 @@ import { Movie } from "@/types/tmdb";
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
-    <div className="grid gap-2.5">
+    <div className="grid gap-2.5 animate-fade-in-lg">
       <div className="w-60 xl:w-70 overflow-hidden rounded-lg snap-start relative group">
         {/* Image */}
         <div className="relative aspect-2/3">
