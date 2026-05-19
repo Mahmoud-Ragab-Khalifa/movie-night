@@ -1,6 +1,8 @@
-import { getMovieDetails } from "@/services/api";
+import { getMovieCast, getMovieDetails } from "@/services/api";
 import MovieDetails from "./_components/MovieDetails";
 import Image from "next/image";
+import MovieCast from "./_components/MovieCast";
+import { MovieCastPerson } from "@/types/tmdb";
 
 const MovieDetailsPage = async ({
   params,
@@ -10,6 +12,8 @@ const MovieDetailsPage = async ({
   const { id } = await params;
 
   const movie = await getMovieDetails(id);
+
+  const movieCast: MovieCastPerson[] = await getMovieCast(id);
 
   return (
     <main className="bg-linear-to-b from-black/20 via-black/90 to-black">
@@ -30,6 +34,8 @@ const MovieDetailsPage = async ({
 
         <div className="container pt-50 md:pt-70 relative">
           <MovieDetails movie={movie} />
+
+          <MovieCast cast={movieCast} movieTitle={movie.title} />
         </div>
       </section>
     </main>
