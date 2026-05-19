@@ -2,6 +2,7 @@ import {
   GenresResponse,
   MovieCastResponse,
   MovieDetails,
+  MovieReviewsResponse,
   TmdbResponse,
 } from "@/types/tmdb";
 
@@ -178,4 +179,29 @@ export const getMovieCast = async (id: number) => {
   const movieCast: MovieCastResponse = await response.json();
 
   return movieCast.cast ?? [];
+};
+
+export const getMovieReviews = async (id: number) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}/reviews`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["movie-reviews"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.error("Failed To Get Movie Reviews");
+  }
+
+  const movieReviews: MovieReviewsResponse = await response.json();
+
+  return movieReviews.results ?? [];
 };
