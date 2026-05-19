@@ -10,12 +10,12 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="flex flex-col gap-5 md:flex-row">
-        <div className="relative min-w-70 w-70 xl:w-80 aspect-2/3 mx-auto md:mx-0 animate-fade-in-lg">
+        <div className="relative rounded-lg overflow-hidden min-w-70 w-70 xl:w-80 aspect-2/3 mx-auto md:mx-0 animate-fade-in-lg">
           <Image
             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`}
             alt={movie.title}
             fill
-            className="object-cover object-center rounded-lg"
+            className="object-cover object-center"
             sizes="(max-width: 768px) 200px, 240px"
             priority={false}
           />

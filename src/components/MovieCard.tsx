@@ -4,10 +4,18 @@ import Image from "next/image";
 import { Movie } from "@/types/tmdb";
 import Link from "next/link";
 
-const MovieCard = ({ movie }: { movie: Movie }) => {
+const MovieCard = ({
+  movie,
+  isPaginatedCard = false,
+}: {
+  movie: Movie;
+  isPaginatedCard?: boolean;
+}) => {
   return (
     <div className="grid gap-2.5 animate-fade-in-lg">
-      <div className="w-60 xl:w-70 overflow-hidden rounded-lg snap-start relative group">
+      <div
+        className={`${isPaginatedCard ? "w-full" : "w-60 xl:w-70"} overflow-hidden rounded-lg snap-start relative group`}
+      >
         {/* Image */}
         <div className="relative aspect-2/3">
           <Image
@@ -48,32 +56,34 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
               className={`${baseClasses} ${sizeClasses.sm} hidden md:flex w-full mt-2.5`}
             >
               <CircleFadingPlus size={18} />
-              <span>View Details</span>
+              <span>{isPaginatedCard ? "View" : "View Details"}</span>
             </Link>
           </div>
         </div>
       </div>
 
       {/* Footer Info */}
-      <div className="hidden md:block px-1.5">
-        <p className="mb-0.5 text-sm font-medium overflow-hidden max-w-55 xl:max-w-65 truncate">
-          {movie?.title}
-        </p>
+      {!isPaginatedCard && (
+        <div className="hidden md:block px-1.5">
+          <p className="mb-0.5 text-sm font-medium overflow-hidden max-w-55 xl:max-w-65 truncate">
+            {movie?.title}
+          </p>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <Star className="text-yellow-500 fill-yellow-500" size={17} />
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <Star className="text-yellow-500 fill-yellow-500" size={17} />
 
-            <span className="text-neutral-300 font-medium text-sm pt-1">
-              {movie?.vote_average.toFixed(1)}
+              <span className="text-neutral-300 font-medium text-sm pt-1">
+                {movie?.vote_average.toFixed(1)}
+              </span>
+            </div>
+
+            <span className="hidden md:block text-sm text-neutral-300">
+              {movie?.release_date.split("-", 1).join("-")}
             </span>
           </div>
-
-          <span className="hidden md:block text-sm text-neutral-300">
-            {movie?.release_date.split("-", 1).join("-")}
-          </span>
         </div>
-      </div>
+      )}
     </div>
   );
 };
