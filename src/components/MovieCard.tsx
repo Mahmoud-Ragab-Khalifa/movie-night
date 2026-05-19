@@ -1,7 +1,8 @@
-import { Play, PlayCircle, Star } from "lucide-react";
-import { Button } from "./Button";
+import { CircleFadingPlus, Star } from "lucide-react";
+import { baseClasses, sizeClasses } from "./Button";
 import Image from "next/image";
 import { Movie } from "@/types/tmdb";
+import Link from "next/link";
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   return (
@@ -34,15 +35,21 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
                 {movie?.release_date.split("-", 2).join("-")}
               </span>
 
-              <button className="fully-rounded-btn bg-primary animate-pulse shadow-2xl shadow-primary md:hidden">
-                <Play size={18} />
-              </button>
+              <Link
+                href={`/movie/${movie.id}/details`}
+                className="fully-rounded-btn bg-primary animate-pulse shadow-2xl shadow-primary md:hidden"
+              >
+                <CircleFadingPlus size={18} />
+              </Link>
             </div>
 
-            <Button size="sm" className="hidden md:block w-full mt-2.5">
-              <PlayCircle size={18} />
+            <Link
+              href={`/movie/${movie.id}/details`}
+              className={`${baseClasses} ${sizeClasses.sm} hidden md:flex w-full mt-2.5`}
+            >
+              <CircleFadingPlus size={18} />
               <span>View Details</span>
-            </Button>
+            </Link>
           </div>
         </div>
       </div>
