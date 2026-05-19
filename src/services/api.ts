@@ -1,4 +1,9 @@
-import { GenresResponse, MovieDetails, TmdbResponse } from "@/types/tmdb";
+import {
+  GenresResponse,
+  MovieCastResponse,
+  MovieDetails,
+  TmdbResponse,
+} from "@/types/tmdb";
 
 export const getTrendingMovies = async () => {
   const response = await fetch(
@@ -148,4 +153,29 @@ export const getMovieDetails = async (id: number) => {
   const movieDetails: MovieDetails = await response.json();
 
   return movieDetails ?? {};
+};
+
+export const getMovieCast = async (id: number) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}/credits`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["movie-cast"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.error("Failed To Get Movie Cast");
+  }
+
+  const movieCast: MovieCastResponse = await response.json();
+
+  return movieCast.cast ?? [];
 };
