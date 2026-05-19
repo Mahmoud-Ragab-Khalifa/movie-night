@@ -38,7 +38,7 @@ const MovieDetailsPage = async ({
 
           <MovieCast cast={movieCast} movieTitle={movie.title} />
 
-          <MovieReviews movieTitle={movie.title} />
+          <MovieReviews movieId={id} movieTitle={movie.title} />
         </div>
       </section>
     </main>
