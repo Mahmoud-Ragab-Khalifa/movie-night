@@ -1,6 +1,6 @@
 import { baseClasses, Button, sizeClasses } from "@/components/Button";
 import { Movie } from "@/types/tmdb";
-import { PlayCircle, Plus, Star } from "lucide-react";
+import { CircleFadingPlus, PlayCircle, Star } from "lucide-react";
 import Link from "next/link";
 
 const MovieContent = ({ movie }: { movie: Movie }) => {
@@ -47,7 +47,7 @@ const MovieContent = ({ movie }: { movie: Movie }) => {
           href={`/movie/${movie.id}/details`}
           className={`${baseClasses} ${sizeClasses.sm} animate-fade-in-lg animation-delay-400 bg-secondary ring-neutral-700! shadow-surface hover:bg-secondary/80`}
         >
-          <Plus size={18} />
+          <CircleFadingPlus size={18} />
           <span>View Movie Details</span>
         </Link>
       </div>
