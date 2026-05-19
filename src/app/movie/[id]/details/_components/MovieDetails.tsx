@@ -1,7 +1,7 @@
 import { Button } from "@/components/Button";
 import { formatRuntime } from "@/lib/formatRuntime";
 import { MovieDetails as MovieDetailsType } from "@/types/tmdb";
-import { PlayCircle, Plus, StarIcon } from "lucide-react";
+import { BadgePlus, PlayCircle, StarIcon } from "lucide-react";
 import Image from "next/image";
 import DetailsBlock from "./DetailsBlock";
 import { formatMoney } from "@/lib/formatMoney";
@@ -47,7 +47,9 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
               </span>
             ))}
           </div>
-          <p className="text-neutral-300 italic text-sm py-3 md:py-4 w-full md:max-w-2xl animate-fade-in-lg animation-delay-400">{`"${movie.tagline}"`}</p>
+          <p className="text-neutral-300 italic text-sm py-3 md:py-4 w-full md:max-w-2xl animate-fade-in-lg animation-delay-400">
+            {`"${movie.tagline || movie.original_title}"`}
+          </p>
           <h3 className="text-lg font-semibold animate-fade-in-lg animation-delay-500">
             OverView
           </h3>
@@ -65,10 +67,10 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
 
             <Button
               size="sm"
-              className="bg-secondary shadow-none ring-neutral-600! hover:bg-muted! animate-fade-in-lg animation-delay-800"
+              className="bg-secondary! ring-neutral-700! shadow-neutral-950! hover:bg-secondary/80! animate-fade-in-lg animation-delay-800"
             >
-              <Plus size={18} />
-              <span>Show More Info</span>
+              <BadgePlus size={18} className="text-blue-500" />
+              <span>Add To Watchlist</span>
             </Button>
           </div>
         </div>
