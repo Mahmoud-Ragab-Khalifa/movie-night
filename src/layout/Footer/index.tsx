@@ -70,6 +70,18 @@ const Footer = () => {
             <span>Terms Of Service</span>
             <span>Cookie Policy</span>
           </div>
+
+          <p>
+            Made with <span className="animate-pulse">💜</span> by Mahmoud Ragab{" "}
+            <a
+              href="https://wa.me/201067055256"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium animate-pulse text-primary"
+            >
+              Contact Me
+            </a>
+          </p>
         </div>
       </div>
     </footer>
