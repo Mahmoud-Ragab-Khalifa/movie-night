@@ -3,13 +3,14 @@ import { formatRuntime } from "@/lib/formatRuntime";
 import { MovieDetails as MovieDetailsType } from "@/types/tmdb";
 import { PlayCircle, Plus, StarIcon } from "lucide-react";
 import Image from "next/image";
+import DetailsBlock from "./DetailsBlock";
+import { formatMoney } from "@/lib/formatMoney";
 
 const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
-  console.log(movie);
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="flex flex-col gap-5 md:flex-row">
-        <div className="relative min-w-70 w-70 xl:w-80 aspect-2/3 mx-auto md:mx-0">
+        <div className="relative min-w-70 w-70 xl:w-80 aspect-2/3 mx-auto md:mx-0 animate-fade-in-lg">
           <Image
             src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`}
             alt={movie.title}
@@ -23,10 +24,10 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
         </div>
 
         <div>
-          <h1 className="font-bold text-xl md:text-2xl xl:text-3xl">
+          <h1 className="font-bold text-xl md:text-2xl xl:text-3xl animate-fade-in-lg animation-delay-100">
             {movie.title}
           </h1>
-          <div className="flex gap-3 items-center py-2.5 tex-sm text-neutral-300">
+          <div className="flex gap-3 items-center py-2.5 tex-sm text-neutral-300 animate-fade-in-lg animation-delay-200">
             <div className="flex items-center gap-1.5">
               <StarIcon className="text-yellow-500 fill-yellow-500" size={17} />
               <span className="mt-0.5 block">
@@ -36,7 +37,7 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
             <span>{formatRuntime(movie.runtime)}</span>
             <span>{movie.release_date}</span>
           </div>
-          <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-2 flex-wrap animate-fade-in-lg animation-delay-300">
             {movie.genres.map((genre) => (
               <span
                 key={genre.id}
@@ -46,20 +47,25 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
               </span>
             ))}
           </div>
-          <p className="text-neutral-300 italic text-sm py-3 md:py-4 w-full md:max-w-2xl">{`"${movie.tagline}"`}</p>
-          <h3 className="text-lg font-semibold">OverView</h3>
-          <p className="text-neutral-300 text-sm py-2.5 w-full md:max-w-2xl">
+          <p className="text-neutral-300 italic text-sm py-3 md:py-4 w-full md:max-w-2xl animate-fade-in-lg animation-delay-400">{`"${movie.tagline}"`}</p>
+          <h3 className="text-lg font-semibold animate-fade-in-lg animation-delay-500">
+            OverView
+          </h3>
+          <p className="text-neutral-300 text-sm py-2.5 w-full md:max-w-2xl animate-fade-in-lg animation-delay-600">
             {movie.overview}
           </p>
-          <div className="flex items-center gap-4 animate-fade-in-lg animation-delay-800 pt-5">
-            <Button size="sm">
+          <div className="flex items-center gap-4 pt-5">
+            <Button
+              size="sm"
+              className="animate-fade-in-lg animation-delay-700"
+            >
               <PlayCircle size={18} />
               <span>Watch Now</span>
             </Button>
 
             <Button
               size="sm"
-              className="bg-secondary shadow-none ring-neutral-600! hover:bg-muted!"
+              className="bg-secondary shadow-none ring-neutral-600! hover:bg-muted! animate-fade-in-lg animation-delay-800"
             >
               <Plus size={18} />
               <span>Show More Info</span>
@@ -69,11 +75,61 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
       </div>
 
       <div className="mt-8 md:mt-16 grid grid-cols-1 gap-5 md:grid-cols-2">
-        <div>
-          <h4>Details</h4>
+        <div className="animate-fade-in-lg animation-delay-900">
+          <h4 className="text-lg font-semibold mb-4">Details</h4>
+          <DetailsBlock
+            title={"Production Companies"}
+            subTitle={movie.production_companies
+              .map((item) => item.name)
+              .join(" | ")}
+          />
+          <DetailsBlock
+            title={"Production Countries"}
+            subTitle={movie.production_countries
+              .map((item) => item.name)
+              .join(" | ")}
+          />
+          <DetailsBlock title={"Budget"} subTitle={formatMoney(movie.budget)} />
+          <DetailsBlock
+            title={"Revenue"}
+            subTitle={formatMoney(movie.revenue)}
+          />
+          <DetailsBlock title={"Status"} subTitle={movie.status} />
+          <DetailsBlock
+            title={"Original Language"}
+            subTitle={movie.original_language.toUpperCase()}
+          />
         </div>
-        <div>
-          <h4>Rating</h4>
+        <div className="animate-fade-in-lg animation-delay-1000">
+          <h4 className="text-lg font-semibold mb-4">Rating</h4>
+          <div className="flex items-center gap-7 py-5">
+            <div className="w-20 h-20 ring-3 ring-primary flex items-center justify-center rounded-full">
+              {movie.vote_average.toFixed(1)}
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="text-sm text-neutral-300">
+                From {movie.vote_count.toLocaleString()} Votes
+              </span>
+              <span className="relative w-full h-1.5 rounded-full bg-secondary overflow-hidden">
+                <span
+                  className="absolute inset-y-0 left-0 bg-primary rounded-full"
+                  style={{ width: `${movie.vote_average * 10}%` }}
+                />
+              </span>
+            </div>
+          </div>
+          <DetailsBlock
+            title={"Is Suitable For Adults"}
+            subTitle={movie.adult ? "No It Is +18" : "Yes, Happy In Watching"}
+          />
+          <DetailsBlock
+            title={"Popularity Avg"}
+            subTitle={movie.popularity.toString()}
+          />
+          <DetailsBlock
+            title={"Original Title"}
+            subTitle={movie.original_title}
+          />
         </div>
       </div>
     </div>

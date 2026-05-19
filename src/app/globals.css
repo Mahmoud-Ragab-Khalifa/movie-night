@@ -109,8 +109,20 @@ body {
   animation-delay: 600ms;
 }
 
+.animation-delay-700 {
+  animation-delay: 700ms;
+}
+
 .animation-delay-800 {
   animation-delay: 800ms;
+}
+
+.animation-delay-900 {
+  animation-delay: 900ms;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1000ms;
 }
 
 .no-scrollbar::-webkit-scrollbar {
