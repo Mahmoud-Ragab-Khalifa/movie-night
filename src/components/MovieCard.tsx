@@ -19,7 +19,11 @@ const MovieCard = ({
         {/* Image */}
         <div className="relative aspect-2/3">
           <Image
-            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`}
+            src={
+              movie.poster_path
+                ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`
+                : `https://placehold.co/120x120/png?text=${movie.title}`
+            }
             alt={movie.title}
             fill
             sizes="(max-width: 768px) 200px, 240px"

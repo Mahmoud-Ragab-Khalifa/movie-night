@@ -1,32 +1,21 @@
-export function generatePagination(currentPage: number, totalPages: number) {
-  const pages: (number | string)[] = [];
+export const generatePagination = (currentPage: number, totalPages: number) => {
+  const maxButtons = 5;
 
-  // أول صفحة
-  pages.push(1);
-
-  // لو المستخدم بعيد عن البداية
-  if (currentPage > 3) {
-    pages.push("...");
+  if (totalPages <= maxButtons) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
   }
 
-  // الصفحات حوالين current
-  for (
-    let i = Math.max(2, currentPage - 1);
-    i <= Math.min(totalPages - 1, currentPage + 1);
-    i++
-  ) {
-    pages.push(i);
+  let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+
+  let endPage = startPage + maxButtons - 1;
+
+  if (endPage > totalPages) {
+    endPage = totalPages;
+    startPage = totalPages - maxButtons + 1;
   }
 
-  // لو المستخدم بعيد عن النهاية
-  if (currentPage < totalPages - 2) {
-    pages.push("...");
-  }
-
-  // آخر صفحة
-  if (totalPages > 1) {
-    pages.push(totalPages);
-  }
-
-  return pages;
-}
+  return Array.from(
+    { length: endPage - startPage + 1 },
+    (_, i) => startPage + i,
+  );
+};

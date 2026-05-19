@@ -228,5 +228,5 @@ export const getMovieRecommendations = async (id: number, page: number = 1) => {
 
   const movieRecommendations: TmdbResponse = await response.json();
 
-  return movieRecommendations.results ?? [];
+  return movieRecommendations ?? {};
 };

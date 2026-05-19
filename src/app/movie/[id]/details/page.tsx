@@ -8,10 +8,16 @@ import MovieRecommendations from "./_components/MovieRecommendations";
 
 const MovieDetailsPage = async ({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: number }>;
+  searchParams: Promise<{ page: number }>;
 }) => {
   const { id } = await params;
+
+  const searchParamsPage = await searchParams;
+
+  const page = searchParamsPage.page ?? 1;
 
   const movie = await getMovieDetails(id);
 
@@ -41,7 +47,7 @@ const MovieDetailsPage = async ({
 
           <MovieReviews movieId={id} movieTitle={movie.title} />
 
-          <MovieRecommendations />
+          <MovieRecommendations movieId={id} page={page} />
         </div>
       </section>
     </main>

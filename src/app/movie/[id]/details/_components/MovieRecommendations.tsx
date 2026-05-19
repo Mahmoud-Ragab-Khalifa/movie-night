@@ -2,10 +2,23 @@ import MainHeader from "@/components/MainHeader";
 import MovieCard from "@/components/MovieCard";
 import MoviesSlider from "@/components/MoviesSlider";
 import { getMovieRecommendations } from "@/services/api";
-import { Movie } from "@/types/tmdb";
+import { Movie, TmdbResponse } from "@/types/tmdb";
+import PaginationButtons from "./PaginationButtons";
 
-const MovieRecommendations = async () => {
-  const MovieRecommendations: Movie[] = await getMovieRecommendations(120);
+const MovieRecommendations = async ({
+  movieId,
+  page,
+}: {
+  movieId: number;
+  page: number;
+}) => {
+  const MovieRecommendationsResponse: TmdbResponse =
+    await getMovieRecommendations(movieId, page);
+
+  const MovieRecommendations: Movie[] = MovieRecommendationsResponse.results;
+  const MovieRecommendationsPages: number =
+    MovieRecommendationsResponse.total_pages;
+
   return (
     <div className="mt-8 md:mt-16 relative">
       <MainHeader
@@ -24,6 +37,12 @@ const MovieRecommendations = async () => {
           <MovieCard key={movie.id} movie={movie} isPaginatedCard={true} />
         ))}
       </div>
+
+      <PaginationButtons
+        currentPage={page}
+        totalPages={MovieRecommendationsPages}
+        movieId={movieId}
+      />
     </div>
   );
 };
