@@ -51,7 +51,7 @@ const MovieCast = ({
       </div>
 
       <div
-        className="flex items-center gap-5 overflow-x-scroll no-scrollbar relative"
+        className="flex gap-5 overflow-x-scroll no-scrollbar relative"
         ref={sliderRef}
       >
         {cast.slice(0, 10).map((person) => (
@@ -61,7 +61,7 @@ const MovieCast = ({
                 src={
                   person.profile_path
                     ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/w185${person.profile_path}`
-                    : "https://res.cloudinary.com/djdhc5rlo/image/upload/q_auto/f_auto/v1779202359/dummy-person_ybxtpd.png"
+                    : "https://placehold.co/120x120/png?text=Actor"
                 }
                 alt={person.name}
                 fill
@@ -84,9 +84,9 @@ const MovieCast = ({
       </div>
 
       {/* Colerd Gradient Border */}
-      <div className="absolute w-1 h-[calc(100%-50px)] right-0 bottom-0 bg-linear-to-b from-primary/5 via-black/90 to-primary/70 animate-pulse" />
+      <div className="absolute w-1 h-[calc(100%-50px)] right-0 bottom-0 bg-linear-to-b from-primary/5 via-black/90 to-primary/70 animate-pulse rounded-full" />
 
-      <div className="absolute w-1 h-[calc(100%-50px)] left-0 bottom-0 bg-linear-to-t from-primary/5 via-black/90 to-primary/70 animate-pulse" />
+      <div className="absolute w-1 h-[calc(100%-50px)] left-0 bottom-0 bg-linear-to-t from-primary/5 via-black/90 to-primary/70 animate-pulse rounded-full" />
     </div>
   );
 };
