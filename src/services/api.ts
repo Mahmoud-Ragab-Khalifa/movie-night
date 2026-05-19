@@ -205,3 +205,28 @@ export const getMovieReviews = async (id: number) => {
 
   return movieReviews.results ?? [];
 };
+
+export const getMovieRecommendations = async (id: number, page: number = 1) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}/recommendations?page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["movie-recommendations"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.error("Failed To Get Movie Recommendations");
+  }
+
+  const movieRecommendations: TmdbResponse = await response.json();
+
+  return movieRecommendations.results ?? [];
+};
