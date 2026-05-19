@@ -3,6 +3,7 @@ import MovieDetails from "./_components/MovieDetails";
 import Image from "next/image";
 import MovieCast from "./_components/MovieCast";
 import { MovieCastPerson } from "@/types/tmdb";
+import MovieReviews from "./_components/MovieReviews";
 
 const MovieDetailsPage = async ({
   params,
@@ -36,6 +37,8 @@ const MovieDetailsPage = async ({
           <MovieDetails movie={movie} />
 
           <MovieCast cast={movieCast} movieTitle={movie.title} />
+
+          <MovieReviews movieTitle={movie.title} />
         </div>
       </section>
     </main>
