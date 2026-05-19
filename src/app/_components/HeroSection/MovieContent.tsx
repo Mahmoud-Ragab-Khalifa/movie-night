@@ -1,6 +1,7 @@
-import { Button } from "@/components/Button";
+import { baseClasses, Button, sizeClasses } from "@/components/Button";
 import { Movie } from "@/types/tmdb";
 import { PlayCircle, Plus, Star } from "lucide-react";
+import Link from "next/link";
 
 const MovieContent = ({ movie }: { movie: Movie }) => {
   return (
@@ -28,27 +29,27 @@ const MovieContent = ({ movie }: { movie: Movie }) => {
         </span>
       </div>
 
-      <h1 className="text-4xl md:text-6xl font-bold my-4 md:max-w-3xl md:leading-18 text-center md:text-start animate-fade-in-lg animation-delay-300">
+      <h1 className="text-4xl md:text-6xl font-bold my-4 md:max-w-3xl md:leading-18 text-center md:text-start animate-fade-in-lg animation-delay-100">
         {movie?.title}
       </h1>
 
-      <p className="text-base md:text-lg md:max-w-2xl line-clamp-3 md:line-clamp-4 mb-8 text-neutral-300 text-center md:text-start animate-fade-in-lg animation-delay-500">
+      <p className="text-base md:text-lg md:max-w-2xl line-clamp-3 md:line-clamp-4 mb-8 text-neutral-300 text-center md:text-start animate-fade-in-lg animation-delay-200">
         {movie?.overview}
       </p>
 
-      <div className="flex items-center gap-4 justify-center md:justify-start animate-fade-in-lg animation-delay-800">
-        <Button size="sm">
+      <div className="flex items-center gap-4 justify-center md:justify-start">
+        <Button size="sm" className="animate-fade-in-lg animation-delay-300">
           <PlayCircle size={18} />
           <span>Watch Now</span>
         </Button>
 
-        <Button
-          size="sm"
-          className="bg-secondary shadow-none ring-neutral-600! hover:bg-muted!"
+        <Link
+          href={`/movie/${movie.id}/details`}
+          className={`${baseClasses} ${sizeClasses.sm} animate-fade-in-lg animation-delay-400 bg-secondary ring-neutral-700! shadow-surface hover:bg-secondary/80`}
         >
           <Plus size={18} />
-          <span>Show More Info</span>
-        </Button>
+          <span>View Movie Details</span>
+        </Link>
       </div>
     </>
   );
