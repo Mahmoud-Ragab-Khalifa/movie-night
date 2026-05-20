@@ -10,7 +10,7 @@ export enum ImageSizes {
   ORIGINAL = "original",
 }
 
-export enum ImageType {
+export enum ImageTypes {
   MOBILE_HERO = "Mobile-Hero",
   DESKTOP_HERO = "Desktop-Hero",
   MOVIE_CARD = "Movie-Card",

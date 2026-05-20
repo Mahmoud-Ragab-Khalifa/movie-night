@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Image from "next/image";
 import MovieContent from "./MovieContent";
+import { getImageUrl } from "@/lib/getImageUrl";
+import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 
 const HeroSection = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -15,8 +17,12 @@ const HeroSection = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
 
   const images = featuredMovies.map((movie) =>
     isMobile
-      ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`
-      : `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}`,
+      ? getImageUrl(ImageSizes.W500, movie.poster_path, ImageTypes.MOBILE_HERO)
+      : getImageUrl(
+          ImageSizes.W1280,
+          movie.backdrop_path,
+          ImageTypes.DESKTOP_HERO,
+        ),
   );
 
   useEffect(() => {
