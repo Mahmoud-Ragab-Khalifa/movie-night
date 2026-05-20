@@ -1,14 +1,14 @@
 import { ImageSizes, ImageType } from "@/types/imageSizes";
 
 const fallbackImage: Record<ImageType, string> = {
-  "Mobile-Hero":
+  [ImageType.MOBILE_HERO]:
     "https://res.cloudinary.com/djdhc5rlo/image/upload/v1779282696/movie-mobile-hero_vlhlm6.png",
-  "Desktop-Hero":
+  [ImageType.DESKTOP_HERO]:
     "https://res.cloudinary.com/djdhc5rlo/image/upload/v1779282710/movie-desktop-hero_c2gtnb.png",
-  "Movie-Card":
+  [ImageType.MOVIE_CARD]:
     "https://res.cloudinary.com/djdhc5rlo/image/upload/v1779282653/movie-card_kkihae.png",
-  Actor: "https://placehold.co/120x120/png?text=Actor",
-  User: "https://placehold.co/80x80/png?text=User",
+  [ImageType.ACTOR]: "https://placehold.co/120x120/png?text=Actor",
+  [ImageType.USER]: "https://placehold.co/80x80/png?text=User",
 };
 
 export function getImageUrl(
