@@ -8,3 +8,10 @@ export type ImageSizes =
   | "w780"
   | "w1280"
   | "original";
+
+export type ImageType =
+  | "Mobile-Hero"
+  | "Desktop-Hero"
+  | "Movie-Card"
+  | "User"
+  | "Actor";
