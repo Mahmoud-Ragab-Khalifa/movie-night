@@ -1,5 +1,6 @@
 import MainHeader from "@/components/MainHeader";
 import MoviesSlider from "@/components/MoviesSlider";
+import { ImageSizes } from "@/types/imageSizes";
 import { Movie } from "@/types/tmdb";
 
 const PopularSection = async ({
@@ -15,7 +16,7 @@ const PopularSection = async ({
           description="Most Watched Movies Right Now"
         />
 
-        <MoviesSlider movies={popularMovies} imageSize="w342" />
+        <MoviesSlider movies={popularMovies} imageSize={ImageSizes.W342} />
       </div>
     </section>
   );

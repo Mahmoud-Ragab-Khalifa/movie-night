@@ -4,13 +4,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 import { Movie } from "@/types/tmdb";
 import MovieCard from "./MovieCard";
+import { ImageSizes } from "@/types/imageSizes";
 
 const MoviesSlider = ({
   movies,
-  imageSize = "original",
+  imageSize = ImageSizes.ORIGINAL,
 }: {
   movies: Movie[];
-  imageSize?: string;
+  imageSize?: ImageSizes;
 }) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 

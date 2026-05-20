@@ -1,5 +1,6 @@
 import MainHeader from "@/components/MainHeader";
 import MoviesSlider from "@/components/MoviesSlider";
+import { ImageSizes } from "@/types/imageSizes";
 import { Movie } from "@/types/tmdb";
 
 const TopRatedSection = async ({
@@ -15,7 +16,7 @@ const TopRatedSection = async ({
           description="Highest Rated Movies Of All Time"
         />
 
-        <MoviesSlider movies={topRatedMovies} imageSize="w342" />
+        <MoviesSlider movies={topRatedMovies} imageSize={ImageSizes.W342} />
       </div>
     </section>
   );

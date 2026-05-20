@@ -1,5 +1,6 @@
 import MainHeader from "@/components/MainHeader";
 import MoviesSlider from "@/components/MoviesSlider";
+import { ImageSizes } from "@/types/imageSizes";
 import { Movie } from "@/types/tmdb";
 
 const TrendingSection = ({ movies }: { movies: Movie[] }) => {
@@ -11,7 +12,7 @@ const TrendingSection = ({ movies }: { movies: Movie[] }) => {
           description="Stay Updated With What Everyone's Watching"
         />
 
-        <MoviesSlider movies={movies} imageSize="w342" />
+        <MoviesSlider movies={movies} imageSize={ImageSizes.W342} />
       </div>
     </section>
   );

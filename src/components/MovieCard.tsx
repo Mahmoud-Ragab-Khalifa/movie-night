@@ -3,15 +3,17 @@ import { baseClasses, sizeClasses } from "./Button";
 import Image from "next/image";
 import { Movie } from "@/types/tmdb";
 import Link from "next/link";
+import { ImageSizes, ImageTypes } from "@/types/imageSizes";
+import { getImageUrl } from "@/lib/getImageUrl";
 
 const MovieCard = ({
   movie,
   isPaginatedCard = false,
-  imageSize = "original",
+  imageSize = ImageSizes.ORIGINAL,
 }: {
   movie: Movie;
   isPaginatedCard?: boolean;
-  imageSize?: string;
+  imageSize?: ImageSizes;
 }) => {
   return (
     <div className="grid gap-2.5 animate-fade-in-lg">
@@ -21,11 +23,11 @@ const MovieCard = ({
         {/* Image */}
         <div className="relative aspect-2/3">
           <Image
-            src={
-              movie.poster_path
-                ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${imageSize}/${movie.poster_path}`
-                : `https://placehold.co/120x120/png?text=${movie.title}`
-            }
+            src={getImageUrl(
+              imageSize,
+              movie.poster_path,
+              ImageTypes.MOVIE_CARD,
+            )}
             alt={movie.title}
             fill
             sizes="(max-width: 768px) 200px, 240px"

@@ -2,6 +2,7 @@ import { Genre, Movie } from "@/types/tmdb";
 import MoviesSlider from "@/components/MoviesSlider";
 import MoviesGenres from "./MoviesGenres";
 import { getMoviesByGenre } from "@/services/api";
+import { ImageSizes } from "@/types/imageSizes";
 
 const BrowseByGenreSection = async ({
   moviesGenres,
@@ -27,7 +28,7 @@ const BrowseByGenreSection = async ({
           }
         />
 
-        <MoviesSlider movies={moviesByGenre} imageSize="w342" />
+        <MoviesSlider movies={moviesByGenre} imageSize={ImageSizes.W342} />
       </div>
     </section>
   );
