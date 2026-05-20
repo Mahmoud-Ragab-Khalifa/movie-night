@@ -15,7 +15,7 @@ const PopularSection = async ({
           description="Most Watched Movies Right Now"
         />
 
-        <MoviesSlider movies={popularMovies} />
+        <MoviesSlider movies={popularMovies} imageSize="w342" />
       </div>
     </section>
   );

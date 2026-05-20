@@ -15,7 +15,7 @@ const TopRatedSection = async ({
           description="Highest Rated Movies Of All Time"
         />
 
-        <MoviesSlider movies={topRatedMovies} />
+        <MoviesSlider movies={topRatedMovies} imageSize="w342" />
       </div>
     </section>
   );

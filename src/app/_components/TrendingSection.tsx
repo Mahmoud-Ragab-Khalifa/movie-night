@@ -11,7 +11,7 @@ const TrendingSection = ({ movies }: { movies: Movie[] }) => {
           description="Stay Updated With What Everyone's Watching"
         />
 
-        <MoviesSlider movies={movies} />
+        <MoviesSlider movies={movies} imageSize="w342" />
       </div>
     </section>
   );
