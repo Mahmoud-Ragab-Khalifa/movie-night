@@ -3,6 +3,7 @@ import MovieCard from "@/components/MovieCard";
 import MoviesSlider from "@/components/MoviesSlider";
 import { Movie, TmdbResponse } from "@/types/tmdb";
 import PaginationButtons from "./PaginationButtons";
+import { ImageSizes } from "@/types/imageSizes";
 
 const MovieRecommendations = ({
   MovieRecommendationsResponse,
@@ -36,7 +37,7 @@ const MovieRecommendations = ({
             key={movie.id}
             movie={movie}
             isPaginatedCard={true}
-            imageSize={"w185"}
+            imageSize={ImageSizes.W185}
           />
         ))}
       </div>

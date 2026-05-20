@@ -1,5 +1,7 @@
 "use client";
 
+import { getImageUrl } from "@/lib/getImageUrl";
+import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import { MovieCastPerson } from "@/types/tmdb";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -58,11 +60,11 @@ const MovieCast = ({
           <div key={person.id} className="relative">
             <div className="relative w-30 h-30 rounded-full overflow-hidden">
               <Image
-                src={
-                  person.profile_path
-                    ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/w185${person.profile_path}`
-                    : "https://placehold.co/120x120/png?text=Actor"
-                }
+                src={getImageUrl(
+                  ImageSizes.W185,
+                  person.profile_path,
+                  ImageTypes.ACTOR,
+                )}
                 alt={person.name}
                 fill
                 sizes="120px"

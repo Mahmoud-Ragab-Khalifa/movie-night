@@ -1,4 +1,6 @@
 import { formatDate } from "@/lib/formatDate";
+import { getImageUrl } from "@/lib/getImageUrl";
+import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import { MovieReview } from "@/types/tmdb";
 import { Star } from "lucide-react";
 import Image from "next/image";
@@ -23,11 +25,11 @@ const MovieReviews = ({
             <div className="flex items-center gap-4">
               <div className="relative w-20 h-20 rounded-full overflow-hidden">
                 <Image
-                  src={
-                    review.author_details.avatar_path
-                      ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/w185${review.author_details.avatar_path}`
-                      : "https://placehold.co/80x80/png?text=User"
-                  }
+                  src={getImageUrl(
+                    ImageSizes.W154,
+                    review.author_details.avatar_path,
+                    ImageTypes.USER,
+                  )}
                   alt={review.author_details.username}
                   fill
                   sizes="60px"

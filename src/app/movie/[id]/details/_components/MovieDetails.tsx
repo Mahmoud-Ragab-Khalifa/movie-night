@@ -5,6 +5,8 @@ import { BadgePlus, PlayCircle, StarIcon } from "lucide-react";
 import Image from "next/image";
 import DetailsBlock from "./DetailsBlock";
 import { formatMoney } from "@/lib/formatMoney";
+import { getImageUrl } from "@/lib/getImageUrl";
+import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 
 const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
   return (
@@ -12,7 +14,11 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
       <div className="flex flex-col gap-5 md:flex-row">
         <div className="relative rounded-lg overflow-hidden min-w-70 w-70 xl:w-80 aspect-2/3 mx-auto md:mx-0 animate-fade-in-lg">
           <Image
-            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`}
+            src={getImageUrl(
+              ImageSizes.W342,
+              movie.poster_path,
+              ImageTypes.MOVIE_CARD,
+            )}
             alt={movie.title}
             fill
             className="object-cover object-center"

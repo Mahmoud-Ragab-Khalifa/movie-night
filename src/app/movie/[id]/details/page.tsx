@@ -15,6 +15,8 @@ import {
 } from "@/types/tmdb";
 import MovieReviews from "./_components/MovieReviews";
 import MovieRecommendations from "./_components/MovieRecommendations";
+import { getImageUrl } from "@/lib/getImageUrl";
+import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 
 const MovieDetailsPage = async ({
   params,
@@ -47,7 +49,11 @@ const MovieDetailsPage = async ({
         {/* Hero Image */}
         <div className="absolute inset-0 h-[50vh] -z-10">
           <Image
-            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.backdrop_path}`}
+            src={getImageUrl(
+              ImageSizes.W1280,
+              movie.backdrop_path,
+              ImageTypes.DESKTOP_HERO,
+            )}
             alt={movie.title}
             fill
             className="object-cover object-top"
@@ -70,7 +76,6 @@ const MovieDetailsPage = async ({
             page={page}
             MovieRecommendationsResponse={MovieRecommendationsResponse}
           />
-          <h1>Hello</h1>
         </div>
       </section>
     </main>
