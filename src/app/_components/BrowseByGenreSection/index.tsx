@@ -1,16 +1,16 @@
 import { Genre, Movie } from "@/types/tmdb";
 import MoviesSlider from "@/components/MoviesSlider";
-import { getMoviesByGenre } from "@/services/api";
 import MoviesGenres from "./MoviesGenres";
+import { getMoviesByGenre } from "@/services/api";
 
 const BrowseByGenreSection = async ({
   moviesGenres,
   genreId,
 }: {
   moviesGenres: Genre[];
-  genreId: string;
+  genreId: number;
 }) => {
-  const moviesByGenre: Movie[] = await getMoviesByGenre(+genreId);
+  const moviesByGenre: Movie[] = await getMoviesByGenre(genreId);
 
   return (
     <section className="section-gap relative" id="browse-by-genre">
@@ -22,7 +22,7 @@ const BrowseByGenreSection = async ({
         <MoviesGenres
           genres={moviesGenres}
           activeGenre={
-            moviesGenres.find((genre) => genre.id === +genreId) ??
+            moviesGenres.find((genre) => genre.id === genreId) ??
             moviesGenres[0]
           }
         />

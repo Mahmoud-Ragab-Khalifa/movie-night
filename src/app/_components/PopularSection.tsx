@@ -1,11 +1,12 @@
 import MainHeader from "@/components/MainHeader";
 import MoviesSlider from "@/components/MoviesSlider";
-import { getPopularMovies } from "@/services/api";
 import { Movie } from "@/types/tmdb";
 
-const PopularSection = async () => {
-  const popularMovies: Movie[] = await getPopularMovies();
-
+const PopularSection = async ({
+  popularMovies,
+}: {
+  popularMovies: Movie[];
+}) => {
   return (
     <section className="section-gap relative" id="popular">
       <div className="container relative z-50">
