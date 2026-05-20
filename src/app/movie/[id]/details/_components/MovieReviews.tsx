@@ -20,47 +20,53 @@ const MovieReviews = ({
       </h4>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-        {movieReviews.map((review) => (
-          <div key={review.id}>
-            <div className="flex items-center gap-4">
-              <div className="relative w-20 h-20 rounded-full overflow-hidden">
-                <Image
-                  src={getImageUrl(
-                    ImageSizes.W154,
-                    review.author_details.avatar_path,
-                    ImageTypes.USER,
+        {movieReviews && movieReviews.length > 0 ? (
+          movieReviews.slice(0, 6).map((review) => (
+            <div key={review.id}>
+              <div className="flex items-center gap-4">
+                <div className="relative w-20 h-20 rounded-full overflow-hidden">
+                  <Image
+                    src={getImageUrl(
+                      ImageSizes.W154,
+                      review.author_details.avatar_path,
+                      ImageTypes.USER,
+                    )}
+                    alt={review.author_details.username}
+                    fill
+                    sizes="60px"
+                    className="object-cover object-center"
+                  />
+                </div>
+                <div>
+                  <h5>{review.author}</h5>
+                  <span className="text-xs text-muted-foreground font-medium">
+                    {formatDate(review.created_at)}
+                  </span>
+                  {review.author_details.rating && (
+                    <div className="flex items-center gap-1 mt-1">
+                      <Star
+                        size={16}
+                        className="text-yellow-500 fill-yellow-500"
+                      />
+
+                      <span className="text-xs font-bold">
+                        {review.author_details.rating.toFixed(1)}
+                      </span>
+                    </div>
                   )}
-                  alt={review.author_details.username}
-                  fill
-                  sizes="60px"
-                  className="object-cover object-center"
-                />
+                </div>
               </div>
-              <div>
-                <h5>{review.author}</h5>
-                <span className="text-xs text-muted-foreground font-medium">
-                  {formatDate(review.created_at)}
-                </span>
-                {review.author_details.rating && (
-                  <div className="flex items-center gap-1 mt-1">
-                    <Star
-                      size={16}
-                      className="text-yellow-500 fill-yellow-500"
-                    />
 
-                    <span className="text-xs font-bold">
-                      {review.author_details.rating.toFixed(1)}
-                    </span>
-                  </div>
-                )}
-              </div>
+              <p className="text-sm text-neutral-300 line-clamp-3 mt-4 px-1">
+                {review.content}
+              </p>
             </div>
-
-            <p className="text-sm text-neutral-300 line-clamp-3 mt-4 px-1">
-              {review.content}
-            </p>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-sm italic font-medium text-muted-foreground">
+            No Reviews Found For ${movieTitle} Movie.
+          </p>
+        )}
       </div>
     </div>
   );
