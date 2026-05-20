@@ -1,18 +1,15 @@
 import { formatDate } from "@/lib/formatDate";
-import { getMovieReviews } from "@/services/api";
 import { MovieReview } from "@/types/tmdb";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
-const MovieReviews = async ({
-  movieId,
+const MovieReviews = ({
   movieTitle,
+  movieReviews,
 }: {
-  movieId: number;
   movieTitle: string;
+  movieReviews: MovieReview[];
 }) => {
-  const movieReviews: MovieReview[] = await getMovieReviews(movieId);
-
   return (
     <div className="mt-8 md:mt-16 relative">
       <h4 className="text-xl md:text-2xl font-semibold mb-8 relative w-fit pb-3">

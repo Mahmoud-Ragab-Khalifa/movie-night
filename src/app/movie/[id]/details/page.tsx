@@ -1,8 +1,18 @@
-import { getMovieCast, getMovieDetails } from "@/services/api";
+import {
+  getMovieCast,
+  getMovieDetails,
+  getMovieRecommendations,
+  getMovieReviews,
+} from "@/services/api";
 import MovieDetails from "./_components/MovieDetails";
 import Image from "next/image";
 import MovieCast from "./_components/MovieCast";
-import { MovieCastPerson } from "@/types/tmdb";
+import {
+  MovieCastPerson,
+  MovieDetails as MovieDetailsItem,
+  MovieReview,
+  TmdbResponse,
+} from "@/types/tmdb";
 import MovieReviews from "./_components/MovieReviews";
 import MovieRecommendations from "./_components/MovieRecommendations";
 
@@ -19,9 +29,17 @@ const MovieDetailsPage = async ({
 
   const page = searchParamsPage.page ?? 1;
 
-  const movie = await getMovieDetails(id);
-
-  const movieCast: MovieCastPerson[] = await getMovieCast(id);
+  const [movie, movieCast, movieReviews, MovieRecommendationsResponse]: [
+    MovieDetailsItem,
+    MovieCastPerson[],
+    MovieReview[],
+    TmdbResponse,
+  ] = await Promise.all([
+    getMovieDetails(id),
+    getMovieCast(id),
+    getMovieReviews(id),
+    getMovieRecommendations(id, page),
+  ]);
 
   return (
     <main className="bg-linear-to-b from-black/20 via-black/90 to-black">
@@ -45,9 +63,14 @@ const MovieDetailsPage = async ({
 
           <MovieCast cast={movieCast} movieTitle={movie.title} />
 
-          <MovieReviews movieId={id} movieTitle={movie.title} />
+          <MovieReviews movieTitle={movie.title} movieReviews={movieReviews} />
 
-          <MovieRecommendations movieId={id} page={page} />
+          <MovieRecommendations
+            movieId={id}
+            page={page}
+            MovieRecommendationsResponse={MovieRecommendationsResponse}
+          />
+          <h1>Hello</h1>
         </div>
       </section>
     </main>

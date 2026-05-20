@@ -1,20 +1,18 @@
 import MainHeader from "@/components/MainHeader";
 import MovieCard from "@/components/MovieCard";
 import MoviesSlider from "@/components/MoviesSlider";
-import { getMovieRecommendations } from "@/services/api";
 import { Movie, TmdbResponse } from "@/types/tmdb";
 import PaginationButtons from "./PaginationButtons";
 
-const MovieRecommendations = async ({
+const MovieRecommendations = ({
+  MovieRecommendationsResponse,
   movieId,
   page,
 }: {
   movieId: number;
   page: number;
+  MovieRecommendationsResponse: TmdbResponse;
 }) => {
-  const MovieRecommendationsResponse: TmdbResponse =
-    await getMovieRecommendations(movieId, page);
-
   const MovieRecommendations: Movie[] = MovieRecommendationsResponse.results;
   const MovieRecommendationsPages: number =
     MovieRecommendationsResponse.total_pages;
