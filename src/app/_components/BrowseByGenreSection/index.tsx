@@ -27,7 +27,7 @@ const BrowseByGenreSection = async ({
           }
         />
 
-        <MoviesSlider movies={moviesByGenre} imageSize="w300" />
+        <MoviesSlider movies={moviesByGenre} imageSize="w342" />
       </div>
     </section>
   );
