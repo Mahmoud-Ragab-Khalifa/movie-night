@@ -5,7 +5,13 @@ import { useRef } from "react";
 import { Movie } from "@/types/tmdb";
 import MovieCard from "./MovieCard";
 
-const MoviesSlider = ({ movies }: { movies: Movie[] }) => {
+const MoviesSlider = ({
+  movies,
+  imageSize = "original",
+}: {
+  movies: Movie[];
+  imageSize?: string;
+}) => {
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -44,7 +50,7 @@ const MoviesSlider = ({ movies }: { movies: Movie[] }) => {
         className="flex gap-4 overflow-x-scroll scroll-smooth no-scrollbar snap-x snap-mandatory"
       >
         {movies.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard key={movie.id} movie={movie} imageSize={imageSize} />
         ))}
       </div>
     </div>
