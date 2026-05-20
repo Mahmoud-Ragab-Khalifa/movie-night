@@ -32,7 +32,12 @@ const MovieRecommendations = ({
       {/* Desktop Recommendations */}
       <div className="hidden md:grid grid-cols-4 lg:grid-cols-5 gap-4 mt-8 md:mt-10">
         {MovieRecommendations.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} isPaginatedCard={true} />
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            isPaginatedCard={true}
+            imageSize={"w185"}
+          />
         ))}
       </div>
 

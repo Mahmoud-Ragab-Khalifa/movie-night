@@ -7,9 +7,11 @@ import Link from "next/link";
 const MovieCard = ({
   movie,
   isPaginatedCard = false,
+  imageSize = "original",
 }: {
   movie: Movie;
   isPaginatedCard?: boolean;
+  imageSize?: string;
 }) => {
   return (
     <div className="grid gap-2.5 animate-fade-in-lg">
@@ -21,7 +23,7 @@ const MovieCard = ({
           <Image
             src={
               movie.poster_path
-                ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/original/${movie.poster_path}`
+                ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${imageSize}/${movie.poster_path}`
                 : `https://placehold.co/120x120/png?text=${movie.title}`
             }
             alt={movie.title}
