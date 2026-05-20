@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { navigationLinks } from "@/constants/navigationLinks";
 import { Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
@@ -32,37 +33,20 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
 
   // Handle Navigation Links Active State
 
-  const [hash, setHash] = useState("#home");
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setHash(
-        window.location.hash === "" ||
-          window.location.hash === "#browse-by-genre"
-          ? "#home"
-          : window.location.hash,
-      );
-    };
-
-    handleHashChange();
-
-    window.addEventListener("hashchange", handleHashChange);
-
-    return () => {
-      window.removeEventListener("hashchange", handleHashChange);
-    };
-  }, []);
+  const searchParams = useSearchParams();
+  const activeLink =
+    searchParams.get("section") === "browse-by-genre"
+      ? "home"
+      : (searchParams.get("section") ?? "home");
 
   // Handle Clicking on Home Navigation Link To Work As scroll to top
 
   const pathname = usePathname();
-  const router = useRouter();
 
   const handleClickToHomeLink = (href: string) => {
-    return (
-      (href === "#home" && window.scrollTo({ top: 0, behavior: "smooth" })) ||
-      (href === "#home" && pathname !== "/" && router.push("/"))
-    );
+    if (href === "#home" && pathname === "/") {
+      return window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   return (
@@ -71,18 +55,20 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
 
       <div className="hidden lg:flex items-center gap-1 glass rounded-full px-2 py-1 ring-2 ring-muted shadow-lg shadow-surface">
         {navigationLinks.map((item) => (
-          <a
+          <Link
             key={item.href}
-            href={item.href}
-            className={`${hash === item.href ? "text-foreground" : "text-muted-foreground"} px-4 py-2 text-sm transition-all duration-300 hover:text-foreground hover:bg-surface rounded-full relative`}
-            onClick={() => handleClickToHomeLink(item.href)}
+            href={`/?section=${item.href.slice(1)}${item.href}`}
+            className={`${activeLink === item.href.slice(1) && pathname === "/" ? "text-foreground" : "text-muted-foreground"} px-4 py-2 text-sm transition-all duration-300 hover:text-foreground hover:bg-surface rounded-full relative`}
+            onClick={() => {
+              handleClickToHomeLink(item.href);
+            }}
           >
             {item.label}
 
-            {hash === item.href && (
+            {activeLink === item.href.slice(1) && pathname === "/" && (
               <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-3/5 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
             )}
-          </a>
+          </Link>
         ))}
       </div>
 
@@ -102,21 +88,21 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
         >
           <div className="container grid gap-4">
             {navigationLinks.map((item) => (
-              <a
+              <Link
                 key={item.href}
-                href={item.href}
+                href={`/?section=${item.href.slice(1)}`}
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   handleClickToHomeLink(item.href);
                 }}
-                className={`${hash === item.href ? "text-foreground" : "text-muted-foreground"} text-lg active:text-foreground hover:text-foreground transition-colors duration-300 py-2 nth-[1]:pt-0 relative`}
+                className={`${activeLink === item.href.slice(1) && pathname === "/" ? "text-foreground" : "text-muted-foreground"} text-lg active:text-foreground hover:text-foreground transition-colors duration-300 py-2 nth-[1]:pt-0 relative`}
               >
                 {item.label}
 
-                {hash === item.href && (
+                {activeLink === item.href.slice(1) && pathname === "/" && (
                   <div className="absolute left-0 bottom-0 w-15 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
                 )}
-              </a>
+              </Link>
             ))}
 
             {withSearchBar && <SearchBar />}
