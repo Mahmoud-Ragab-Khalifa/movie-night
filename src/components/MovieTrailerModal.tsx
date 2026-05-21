@@ -8,7 +8,8 @@ import { createPortal } from "react-dom";
 const MovieTrailerModal = () => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const embedUrl = `https://www.youtube.com/embed/dnVvVBNwqbo?autoplay=1&rel=0`;
+  const embedUrl = `https://www.youtube.com/embed/ZdC5mFHPldg?autoplay=1&rel=0`;
+  const trailerUrl = `https://www.youtube.com/watch?v=ZdC5mFHPldg`;
 
   return (
     <>
@@ -19,18 +20,30 @@ const MovieTrailerModal = () => {
 
       {open &&
         createPortal(
-          <div className="fixed inset-0 bg-black/90 flex items-center justify-center px-4 z-200">
+          <div className="fixed inset-0 bg-linear-to-r from-black via-black/80 to-black flex items-center justify-center px-4 z-200">
             {/* close if click anywhere */}
             <div className="absolute inset-0" onClick={() => setOpen(false)} />
 
             <div className="relative z-10 w-full max-w-5xl">
-              {/* Close Button */}
-              <button
-                onClick={() => setOpen(false)}
-                className="absolute -top-12 right-0 text-white fully-rounded-btn bg-primary"
-              >
-                <X size={22} />
-              </button>
+              {/* Close Button and youtube link*/}
+              <div className="absolute inset-x-0 -top-12 flex items-center justify-between">
+                <button
+                  onClick={() => setOpen(false)}
+                  className=" text-white fully-rounded-btn bg-primary"
+                >
+                  <X size={22} />
+                </button>
+
+                <a
+                  href={trailerUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 rounded-full bg-red-600 px-4 py-2 text-white"
+                >
+                  <PlayCircle />
+                  Watch on YouTube
+                </a>
+              </div>
 
               {/* Video */}
               <div className="relative aspect-video overflow-hidden rounded-2xl">
@@ -42,6 +55,10 @@ const MovieTrailerModal = () => {
                   className="absolute inset-0 h-full w-full"
                 />
               </div>
+
+              <p className="absolute -bottom-15 left-1/2 -translate-x-1/2 text-muted-foreground text-sm font-medium  animate-pulse">
+                Click anywhere to close
+              </p>
             </div>
           </div>,
           document.body,
