@@ -1,3 +1,5 @@
+import { ButtonHTMLAttributes } from "react";
+
 export const baseClasses =
   "relative overflow-hidden rounded-md font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 transition-all duration-300 cursor-pointer ring ring-primary flex items-center justify-center gap-2";
 
@@ -7,19 +9,22 @@ export const sizeClasses = {
   lg: "px-8 py-4 text-lg",
 };
 
+type ButtonProps = {
+  className?: string;
+  size?: "sm" | "default" | "lg";
+  children: React.ReactNode;
+} & ButtonHTMLAttributes<HTMLButtonElement>;
+
 export const Button = ({
   className = "",
   size = "default",
   children,
-}: {
-  className?: string;
-  size?: "sm" | "default" | "lg";
-  children: React.ReactNode;
-}) => {
+  ...probs
+}: ButtonProps) => {
   const classes = `${baseClasses} ${sizeClasses[size]} ${className}`;
 
   return (
-    <button className={classes}>
+    <button className={classes} {...probs}>
       <span className="relative flex items-center justify-center gap-2">
         {children}
       </span>
