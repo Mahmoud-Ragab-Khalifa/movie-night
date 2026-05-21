@@ -40,7 +40,7 @@ const MovieTrailerModal = ({
 
       {open &&
         createPortal(
-          <div className="fixed inset-0 bg-linear-to-r from-black via-black/80 to-black flex items-center justify-center px-4 z-200">
+          <div className="fixed inset-0 bg-linear-to-r from-black via-black/80 to-black flex items-center justify-center px-4 z-200 animate-fade-in-lg">
             {/* close if click anywhere */}
             <div className="absolute inset-0" onClick={() => setOpen(false)} />
 
@@ -66,7 +66,7 @@ const MovieTrailerModal = ({
               </div>
 
               {/* Video */}
-              <div className="relative aspect-video overflow-hidden rounded-2xl">
+              <div className="relative aspect-video overflow-hidden rounded-2xl animate-fade-in-lg">
                 <iframe
                   src={embedUrl}
                   title={movieTrailer.name}
