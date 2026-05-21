@@ -46,7 +46,11 @@ const MovieContent = ({
 
       <div className="flex items-center gap-4 justify-center md:justify-start relative">
         <div className="animate-fade-in-lg animation-delay-300">
-          <MovieTrailerModal movieId={movie.id} movieTrailer={movieTrailer} />
+          <MovieTrailerModal
+            movieId={movie.id}
+            movieTrailer={movieTrailer}
+            isHeroSection={true}
+          />
         </div>
 
         <Link

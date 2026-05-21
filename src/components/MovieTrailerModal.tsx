@@ -4,20 +4,21 @@ import { PlayCircle, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./Button";
 import { createPortal } from "react-dom";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { MovieVideo } from "@/types/tmdb";
 
 const MovieTrailerModal = ({
   movieId,
   movieTrailer,
+  isHeroSection,
 }: {
-  movieId: number;
+  movieId?: number;
   movieTrailer: MovieVideo;
+  isHeroSection?: boolean;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const router = useRouter();
-  const pathname = usePathname();
 
   const embedUrl = `https://www.youtube.com/embed/${movieTrailer.key}?autoplay=1&rel=0`;
   const trailerUrl = `https://www.youtube.com/watch?v=${movieTrailer.key}`;
@@ -28,7 +29,9 @@ const MovieTrailerModal = ({
         size="sm"
         onClick={() => {
           setOpen(true);
-          router.replace(`${pathname}?movie_id=${movieId}`, { scroll: false });
+          if (isHeroSection) {
+            router.replace(`/?movie_id=${movieId}`, { scroll: false });
+          }
         }}
       >
         <PlayCircle size={18} />

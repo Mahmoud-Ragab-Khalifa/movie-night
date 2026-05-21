@@ -1,14 +1,21 @@
 import { Button } from "@/components/Button";
 import { formatRuntime } from "@/lib/formatRuntime";
-import { MovieDetails as MovieDetailsType } from "@/types/tmdb";
-import { BadgePlus, PlayCircle, StarIcon } from "lucide-react";
+import { MovieDetails as MovieDetailsType, MovieVideo } from "@/types/tmdb";
+import { BadgePlus, StarIcon } from "lucide-react";
 import Image from "next/image";
 import DetailsBlock from "./DetailsBlock";
 import { formatMoney } from "@/lib/formatMoney";
 import { getImageUrl } from "@/lib/getImageUrl";
 import { ImageSizes, ImageTypes } from "@/types/imageSizes";
+import MovieTrailerModal from "@/components/MovieTrailerModal";
 
-const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
+const MovieDetails = ({
+  movie,
+  movieTrailer,
+}: {
+  movie: MovieDetailsType;
+  movieTrailer: MovieVideo;
+}) => {
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="flex flex-col gap-5 md:flex-row">
@@ -63,13 +70,9 @@ const MovieDetails = ({ movie }: { movie: MovieDetailsType }) => {
             {movie.overview}
           </p>
           <div className="flex items-center gap-4 pt-5">
-            <Button
-              size="sm"
-              className="animate-fade-in-lg animation-delay-700"
-            >
-              <PlayCircle size={18} />
-              <span>Watch Now</span>
-            </Button>
+            <div className="animate-fade-in-lg animation-delay-700">
+              <MovieTrailerModal movieTrailer={movieTrailer} />
+            </div>
 
             <Button
               size="sm"
