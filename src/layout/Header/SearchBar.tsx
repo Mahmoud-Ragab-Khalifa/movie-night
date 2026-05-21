@@ -1,12 +1,29 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Search } from "lucide-react";
+import { Movie } from "@/types/tmdb";
+import { getSearchResults } from "@/services/api";
 
 const SearchBar = () => {
-  const [searchedMovie, setSearchedMovie] = useState<string>("");
-
   const id = useId();
+
+  const [query, setQuery] = useState<string>("");
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      if (!query) return;
+
+      const searchResults: Movie[] = await getSearchResults(query.trim());
+
+      setMovies(searchResults);
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [query]);
+
+  console.log(movies);
 
   return (
     <div className="relative w-full">
@@ -16,8 +33,8 @@ const SearchBar = () => {
         id={id}
         placeholder="Search Movies..."
         className="w-full sm:w-50 ring-2 ring-muted shadow-lg shadow-surface glass py-2 px-4 rounded-full transition-all duration-300 sm:focus:w-64 focus:outline-none caret-primary text-sm focus:ring-2 focus:ring-primary/80 focus:shadow-md focus:shadow-primary"
-        value={searchedMovie}
-        onChange={(e) => setSearchedMovie(e.target.value)}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
       />
 
       <label

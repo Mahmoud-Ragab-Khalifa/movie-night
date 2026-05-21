@@ -1,3 +1,5 @@
+"use server";
+
 import {
   GenresResponse,
   MovieCastResponse,
@@ -249,7 +251,7 @@ export const getMovieVideos = async (id: number) => {
   );
 
   if (!response.ok) {
-    console.log("Failed To Get Movie Videos");
+    console.error("Failed To Get Movie Videos");
   }
 
   const movieVideos: MovieVideosResponse = await response.json();
@@ -274,7 +276,7 @@ export const getSearchResults = async (searchQuery: string) => {
   );
 
   if (!response.ok) {
-    console.log("Failed To Get Search Results");
+    console.error("Failed To Get Search Results");
   }
 
   const searchResults: TmdbResponse = await response.json();
