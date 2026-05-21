@@ -256,3 +256,28 @@ export const getMovieVideos = async (id: number) => {
 
   return movieVideos.results ?? [];
 };
+
+export const getSearchResults = async (searchQuery: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/search/movie?query=${searchQuery}`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["search-results"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.log("Failed To Get Search Results");
+  }
+
+  const searchResults: TmdbResponse = await response.json();
+
+  return searchResults.results ?? [];
+};
