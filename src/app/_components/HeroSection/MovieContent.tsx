@@ -1,6 +1,7 @@
 import { baseClasses, Button, sizeClasses } from "@/components/Button";
+import MovieTrailerModal from "@/components/MovieTrailerModal";
 import { Movie } from "@/types/tmdb";
-import { CircleFadingPlus, PlayCircle, Star } from "lucide-react";
+import { CircleFadingPlus, Star } from "lucide-react";
 import Link from "next/link";
 
 const MovieContent = ({ movie }: { movie: Movie }) => {
@@ -37,11 +38,10 @@ const MovieContent = ({ movie }: { movie: Movie }) => {
         {movie?.overview}
       </p>
 
-      <div className="flex items-center gap-4 justify-center md:justify-start">
-        <Button size="sm" className="animate-fade-in-lg animation-delay-300">
-          <PlayCircle size={18} />
-          <span>Watch Now</span>
-        </Button>
+      <div className="flex items-center gap-4 justify-center md:justify-start relative">
+        <div className="animate-fade-in-lg animation-delay-300">
+          <MovieTrailerModal />
+        </div>
 
         <Link
           href={`/movie/${movie.id}/details`}

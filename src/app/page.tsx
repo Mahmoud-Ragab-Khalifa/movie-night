@@ -32,22 +32,9 @@ const HomePage = async ({
     getTopRatedMovies(),
   ]);
 
-  const embedUrl = `https://www.youtube.com/embed/dnVvVBNwqbo?autoplay=1&rel=0`;
-
   return (
     <main className="bg-linear-to-b from-black via-black/30 to-black/90 relative">
       <HeroSection trendingMovies={trendingMovies} />
-
-      {/* Video */}
-      <div className="relative aspect-video overflow-hidden rounded-2xl w-full mx-auto max-w-2xl h-[50vh]">
-        <iframe
-          src={embedUrl}
-          title={"selectedVideo.name"}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="absolute inset-0 h-full w-full"
-        />
-      </div>
 
       <TrendingSection movies={trendingMovies} />
 
