@@ -1,6 +1,6 @@
 "use client";
 
-import { Movie } from "@/types/tmdb";
+import { Movie, MovieVideo } from "@/types/tmdb";
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import Image from "next/image";
@@ -8,7 +8,13 @@ import MovieContent from "./MovieContent";
 import { getImageUrl } from "@/lib/getImageUrl";
 import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 
-const HeroSection = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
+const HeroSection = ({
+  trendingMovies,
+  movieTrailer,
+}: {
+  trendingMovies: Movie[];
+  movieTrailer: MovieVideo;
+}) => {
   const isMobile = useMediaQuery("(max-width: 768px)");
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -52,7 +58,7 @@ const HeroSection = ({ trendingMovies }: { trendingMovies: Movie[] }) => {
 
       <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-full">
         <div className="container">
-          <MovieContent movie={currentMovie!} />
+          <MovieContent movie={currentMovie!} movieTrailer={movieTrailer} />
         </div>
       </div>
 

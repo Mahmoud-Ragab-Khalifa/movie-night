@@ -4,16 +4,33 @@ import { PlayCircle, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./Button";
 import { createPortal } from "react-dom";
+import { usePathname, useRouter } from "next/navigation";
+import { MovieVideo } from "@/types/tmdb";
 
-const MovieTrailerModal = () => {
+const MovieTrailerModal = ({
+  movieId,
+  movieTrailer,
+}: {
+  movieId: number;
+  movieTrailer: MovieVideo;
+}) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const embedUrl = `https://www.youtube.com/embed/ZdC5mFHPldg?autoplay=1&rel=0`;
-  const trailerUrl = `https://www.youtube.com/watch?v=ZdC5mFHPldg`;
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const embedUrl = `https://www.youtube.com/embed/${movieTrailer.key}?autoplay=1&rel=0`;
+  const trailerUrl = `https://www.youtube.com/watch?v=${movieTrailer.key}`;
 
   return (
     <>
-      <Button size="sm" onClick={() => setOpen(true)}>
+      <Button
+        size="sm"
+        onClick={() => {
+          setOpen(true);
+          router.replace(`${pathname}?movie_id=${movieId}`, { scroll: false });
+        }}
+      >
         <PlayCircle size={18} />
         <span>Watch Now</span>
       </Button>
@@ -49,7 +66,7 @@ const MovieTrailerModal = () => {
               <div className="relative aspect-video overflow-hidden rounded-2xl">
                 <iframe
                   src={embedUrl}
-                  title={"selectedVideo.name"}
+                  title={movieTrailer.name}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="absolute inset-0 h-full w-full"

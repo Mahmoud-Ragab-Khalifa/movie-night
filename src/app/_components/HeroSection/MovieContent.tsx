@@ -1,10 +1,16 @@
 import { baseClasses, Button, sizeClasses } from "@/components/Button";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
-import { Movie } from "@/types/tmdb";
+import { Movie, MovieVideo } from "@/types/tmdb";
 import { CircleFadingPlus, Star } from "lucide-react";
 import Link from "next/link";
 
-const MovieContent = ({ movie }: { movie: Movie }) => {
+const MovieContent = ({
+  movie,
+  movieTrailer,
+}: {
+  movie: Movie;
+  movieTrailer: MovieVideo;
+}) => {
   return (
     <>
       <div className="flex items-center gap-2.5 justify-center md:justify-start animate-fade-in-lg">
@@ -40,7 +46,7 @@ const MovieContent = ({ movie }: { movie: Movie }) => {
 
       <div className="flex items-center gap-4 justify-center md:justify-start relative">
         <div className="animate-fade-in-lg animation-delay-300">
-          <MovieTrailerModal />
+          <MovieTrailerModal movieId={movie.id} movieTrailer={movieTrailer} />
         </div>
 
         <Link
