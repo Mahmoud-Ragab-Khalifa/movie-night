@@ -3,6 +3,7 @@ import {
   MovieCastResponse,
   MovieDetails,
   MovieReviewsResponse,
+  MovieVideosResponse,
   TmdbResponse,
 } from "@/types/tmdb";
 
@@ -229,4 +230,29 @@ export const getMovieRecommendations = async (id: number, page: number = 1) => {
   const movieRecommendations: TmdbResponse = await response.json();
 
   return movieRecommendations ?? {};
+};
+
+export const getMovieVideos = async (id: number) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/movie/${id}/videos`,
+    {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+      },
+      next: {
+        tags: ["movie-videos"],
+        revalidate: 3600,
+      },
+    },
+  );
+
+  if (!response.ok) {
+    console.log("Failed To Get Movie Videos");
+  }
+
+  const movieVideos: MovieVideosResponse = await response.json();
+
+  return movieVideos.results ?? [];
 };
