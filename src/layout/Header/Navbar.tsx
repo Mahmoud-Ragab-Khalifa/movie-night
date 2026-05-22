@@ -89,7 +89,7 @@ const Navbar = () => {
             {navigationLinks.map((item) => (
               <Link
                 key={item.href}
-                href={`/?section=${item.href.slice(1)}`}
+                href={`/?section=${item.href.slice(1)}${item.href}`}
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   handleClickToHomeLink(item.href);
