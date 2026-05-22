@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 
 export const baseClasses =
-  "relative overflow-hidden rounded-md font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 transition-all duration-300 cursor-pointer ring ring-primary flex items-center justify-center gap-2";
+  "relative overflow-hidden rounded-md font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-primary bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 transition-all duration-300 cursor-pointer ring ring-primary flex items-center justify-center gap-2 disabled:opacity-30 disabled:cursor-no-drop disabled:shadow-none";
 
 export const sizeClasses = {
   sm: "px-4 py-2 text-sm",

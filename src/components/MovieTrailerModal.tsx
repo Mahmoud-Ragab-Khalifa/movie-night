@@ -1,6 +1,6 @@
 "use client";
 
-import { PlayCircle, X } from "lucide-react";
+import { OctagonX, PlayCircle, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./Button";
 import { createPortal } from "react-dom";
@@ -26,6 +26,7 @@ const MovieTrailerModal = ({
   return (
     <>
       <Button
+        disabled={!movieTrailer.key}
         size="sm"
         onClick={() => {
           setOpen(true);
@@ -34,8 +35,17 @@ const MovieTrailerModal = ({
           }
         }}
       >
-        <PlayCircle size={18} />
-        <span>Watch Now</span>
+        {movieTrailer.key ? (
+          <>
+            <PlayCircle size={18} />
+            <span>Watch Now</span>
+          </>
+        ) : (
+          <>
+            <OctagonX size={18} />
+            <span>No Trailer</span>
+          </>
+        )}
       </Button>
 
       {open &&

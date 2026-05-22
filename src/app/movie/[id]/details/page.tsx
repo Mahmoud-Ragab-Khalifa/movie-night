@@ -56,7 +56,9 @@ const MovieDetailsPage = async ({
   const movieTrailer: MovieVideo =
     movieVideos.find(
       (movie) => movie.site === "YouTube" && movie.type === "Trailer",
-    ) ?? movieVideos[0];
+    ) ??
+    movieVideos[0] ??
+    {};
 
   return (
     <main className="bg-linear-to-b from-black/20 via-black/90 to-black">
