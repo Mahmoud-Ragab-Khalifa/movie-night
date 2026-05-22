@@ -4,26 +4,30 @@ import { useEffect, useId, useState } from "react";
 import { Search } from "lucide-react";
 import { Movie } from "@/types/tmdb";
 import { getSearchResults } from "@/services/api";
+import SearchResults from "@/components/SearchResults";
+import Loader from "@/components/Loader";
 
 const SearchBar = () => {
   const id = useId();
 
   const [query, setQuery] = useState<string>("");
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const timeout = setTimeout(async () => {
       if (!query) return;
+      setLoading(true);
+      setMovies([]);
 
       const searchResults: Movie[] = await getSearchResults(query.trim());
 
+      setLoading(false);
       setMovies(searchResults);
     }, 1000);
 
     return () => clearTimeout(timeout);
   }, [query]);
-
-  console.log(movies);
 
   return (
     <div className="relative w-full">
@@ -41,8 +45,17 @@ const SearchBar = () => {
         htmlFor={id}
         className="absolute inset-e-4 top-1/2 -translate-y-1/2 cursor-pointer"
       >
-        <Search size={20} />
+        {loading ? <Loader /> : <Search size={20} />}
       </label>
+
+      {query && movies && (
+        <SearchResults
+          loading={loading}
+          setQuery={setQuery}
+          setMovies={setMovies}
+          movies={movies}
+        />
+      )}
     </div>
   );
 };
