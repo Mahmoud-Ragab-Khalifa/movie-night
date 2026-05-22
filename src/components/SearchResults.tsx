@@ -25,7 +25,7 @@ const SearchResults = ({
     setMovies([]);
   };
   return createPortal(
-    <div className="fixed inset-0 z-50 bg-black/10">
+    <div className="fixed inset-0 z-50 bg-black/70">
       {/* handle clickany where around modal */}
       <div className="absolute inset-0" onClick={closeModal} />
 
@@ -38,7 +38,7 @@ const SearchResults = ({
       </button>
 
       {/* searched results movie modal wrapper */}
-      <div className="fixed bottom-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-1/2 w-full md:max-w-[50vw] h-[50vh] glass-strong animate-fade-in-lg rounded-xl p-5 grid gap-5 divide-muted-foreground overflow-y-scroll no-scrollbar">
+      <div className="fixed bottom-0 md:bottom-auto md:top-1/2 md:left-1/2 md:-translate-1/2 w-full md:max-w-[50vw] h-[50vh] glass-strong animate-fade-in-lg rounded-xl px-5 grid overflow-y-scroll no-scrollbar divide-y divide-muted">
         {/* conditional rendering show loader during get data */}
         {loading ? (
           <div className="flex justify-center items-center">
@@ -50,7 +50,7 @@ const SearchResults = ({
               <Link
                 href={`/movie/${movie.id}/details`}
                 onClick={closeModal}
-                className={`flex items-center gap-5 animate-fade-in-lg ${idx < 10 && idx !== 0 && `animation-delay-${idx}00`}`}
+                className={`flex items-center gap-5 py-5 animate-fade-in-lg ${idx < 10 && idx !== 0 && `animation-delay-${idx}00`}`}
               >
                 <div className="relative w-20 h-20 rounded-lg overflow-hidden">
                   <Image
