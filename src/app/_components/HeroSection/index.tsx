@@ -42,7 +42,7 @@ const HeroSection = ({
   const currentMovie: Movie = trendingMovies[currentImage];
 
   return (
-    <section className="h-screen max-h-screen pt-19.5 md:pt-20 lg:pt-21.5 bg-cover bg-center bg-no-repeat relative transition-all duration-500 ease-in-out">
+    <section className="min-h-dvh pt-19.5 md:pt-20 lg:pt-21.5 bg-cover bg-center bg-no-repeat relative transition-all duration-500 ease-in-out">
       <div className="absolute inset-0">
         <Image
           src={images[currentImage]}
