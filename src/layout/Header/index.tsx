@@ -4,6 +4,7 @@ import { Suspense, useEffect, useState } from "react";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
+import { Search } from "lucide-react";
 
 const Header = () => {
   const [isHeaderScrolled, setIsHeaderScrolled] = useState<boolean>(false);
@@ -20,6 +21,9 @@ const Header = () => {
     };
   }, []);
 
+  // control on search results modal
+  const [open, setOpen] = useState<boolean>(false);
+
   return (
     <header
       className={`fixed z-100 top-0 left-0 w-full transition-all duration-300 
@@ -29,23 +33,30 @@ const Header = () => {
         <Logo />
 
         <div className="hidden sm:block lg:hidden">
-          <SearchBar />
+          <SearchBar open={open} setOpen={setOpen} />
         </div>
 
-        <div className="sm:hidden">
+        <div className="flex items-center gap-4 sm:hidden">
+          <button
+            className="cursor-pointer p-2 text-foreground glass rounded-full ring-2 ring-muted shadow-lg shadow-surface"
+            onClick={() => setOpen(true)}
+          >
+            <Search size={22} />
+          </button>
+
           <Suspense>
-            <Navbar withSearchBar={true} />
+            <Navbar />
           </Suspense>
         </div>
 
         <div className="hidden sm:block">
           <Suspense>
-            <Navbar withSearchBar={false} />
+            <Navbar />
           </Suspense>
         </div>
 
         <div className="hidden lg:block">
-          <SearchBar />
+          <SearchBar open={open} setOpen={setOpen} />
         </div>
       </div>
     </header>

@@ -1,33 +1,17 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useId } from "react";
 import { Search } from "lucide-react";
-import { Movie } from "@/types/tmdb";
-import { getSearchResults } from "@/services/api";
 import SearchResults from "@/components/SearchResults";
-import Loader from "@/components/Loader";
 
-const SearchBar = () => {
+const SearchBar = ({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: React.Dispatch<boolean>;
+}) => {
   const id = useId();
-
-  const [query, setQuery] = useState<string>("");
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const timeout = setTimeout(async () => {
-      if (!query) return;
-      setLoading(true);
-      setMovies([]);
-
-      const searchResults: Movie[] = await getSearchResults(query.trim());
-
-      setLoading(false);
-      setMovies(searchResults);
-    }, 1000);
-
-    return () => clearTimeout(timeout);
-  }, [query]);
 
   return (
     <div className="relative w-full">
@@ -36,26 +20,18 @@ const SearchBar = () => {
         name="search"
         id={id}
         placeholder="Search Movies..."
-        className="w-full sm:w-50 ring-2 ring-muted shadow-lg shadow-surface glass py-2 px-4 rounded-full transition-all duration-300 sm:focus:w-64 focus:outline-none caret-primary text-sm focus:ring-2 focus:ring-primary/80 focus:shadow-md focus:shadow-primary"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        className="w-full sm:w-50 ring-2 ring-muted shadow-lg shadow-surface glass py-2 px-4 rounded-full outline-none caret-primary text-sm"
+        onClick={() => setOpen(true)}
       />
 
       <label
         htmlFor={id}
-        className="absolute inset-e-4 top-1/2 -translate-y-1/2 cursor-pointer"
+        className="absolute inset-e-4 top-1/2 -translate-y-1/2 cursor-pointer text-muted-foreground"
       >
-        {loading ? <Loader /> : <Search size={20} />}
+        <Search size={20} />
       </label>
 
-      {query && movies && (
-        <SearchResults
-          loading={loading}
-          setQuery={setQuery}
-          setMovies={setMovies}
-          movies={movies}
-        />
-      )}
+      {open && <SearchResults setOpen={setOpen} />}
     </div>
   );
 };

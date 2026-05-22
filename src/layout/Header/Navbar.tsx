@@ -3,11 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { navigationLinks } from "@/constants/navigationLinks";
 import { Menu, X } from "lucide-react";
-import SearchBar from "./SearchBar";
 import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
+const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   const mobileMenuRef = useRef<HTMLDivElement | null>(null);
@@ -104,8 +103,6 @@ const Navbar = ({ withSearchBar = false }: { withSearchBar?: boolean }) => {
                 )}
               </Link>
             ))}
-
-            {withSearchBar && <SearchBar />}
           </div>
         </div>
       )}
