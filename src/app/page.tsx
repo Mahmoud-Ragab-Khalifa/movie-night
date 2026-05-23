@@ -11,7 +11,6 @@ import {
   getTrendingMovies,
 } from "@/services/api";
 import { Genre, Movie, MovieVideo } from "@/types/tmdb";
-import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 
 const HomePage = async ({
   searchParams,
