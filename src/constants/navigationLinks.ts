@@ -5,4 +5,5 @@ export const navigationLinks: NavigationLinkItem[] = [
   { href: "#trending", label: "Trending" },
   { href: "#popular", label: "Popular" },
   { href: "#top-rated", label: "Top Rated" },
+  { href: "#profile", label: "Profile" },
 ];
