@@ -1,7 +1,7 @@
 "use server";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
-import { signUpSchema } from "@/validations/auth";
+import { signInSchema, signUpSchema } from "@/validations/auth";
 
 export const signUp = async (prevState: unknown, formData: FormData) => {
   const result = signUpSchema.safeParse(Object.fromEntries(formData.entries()));
@@ -38,6 +38,45 @@ export const signUp = async (prevState: unknown, formData: FormData) => {
     return {
       status: 201,
       message: "Welcome, Your Account Created Sucessfully",
+    };
+  } catch (error) {
+    console.error(error);
+
+    return {
+      status: 500,
+      message: "Unexpected Error Check Your Connection",
+    };
+  }
+};
+
+export const SignIn = async (prevState: unknown, formData: FormData) => {
+  const result = signInSchema.safeParse(Object.entries(formData.entries()));
+
+  if (!result.success) {
+    return {
+      errors: result.error.formErrors.fieldErrors,
+      status: 400,
+    };
+  }
+
+  try {
+    const supabase = await createSupabaseServerClient();
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: result.data.password,
+      password: result.data.password,
+    });
+
+    if (error) {
+      return {
+        status: error.status,
+        message: error.message,
+      };
+    }
+
+    return {
+      status: 201,
+      message: "Welcome Back To Your Account",
     };
   } catch (error) {
     console.error(error);
