@@ -50,12 +50,13 @@ export const signUp = async (prevState: unknown, formData: FormData) => {
 };
 
 export const SignIn = async (prevState: unknown, formData: FormData) => {
-  const result = signInSchema.safeParse(Object.entries(formData.entries()));
+  const result = signInSchema.safeParse(Object.fromEntries(formData.entries()));
 
   if (!result.success) {
     return {
       errors: result.error.formErrors.fieldErrors,
       status: 400,
+      formData,
     };
   }
 
@@ -63,7 +64,7 @@ export const SignIn = async (prevState: unknown, formData: FormData) => {
     const supabase = await createSupabaseServerClient();
 
     const { error } = await supabase.auth.signInWithPassword({
-      email: result.data.password,
+      email: result.data.email,
       password: result.data.password,
     });
 
