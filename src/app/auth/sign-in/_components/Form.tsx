@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import Input from "@/components/Input";
+import CustomInput from "@/components/CustomInput";
 import { GoogleIcon } from "@/layout/Footer/SocialMediaIcons";
 import Link from "next/link";
 
@@ -17,8 +17,13 @@ const Form = () => {
       </p>
 
       <div className="grid gap-5">
-        <Input id="email" name="email" type="email" label="Email" />
-        <Input id="password" name="password" type="password" label="Password" />
+        <CustomInput id="email" name="email" type="email" label="Email" />
+        <CustomInput
+          id="password"
+          name="password"
+          type="password"
+          label="Password"
+        />
       </div>
 
       <Button type="submit" className="w-full mt-10" size="default">

@@ -6,7 +6,12 @@ type FloatingInputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
 };
 
-const Input = ({ label, id, className = "", ...props }: FloatingInputProps) => {
+const CustomInput = ({
+  label,
+  id,
+  className = "",
+  ...props
+}: FloatingInputProps) => {
   return (
     <div className="relative w-full">
       <input
@@ -26,4 +31,4 @@ const Input = ({ label, id, className = "", ...props }: FloatingInputProps) => {
   );
 };
 
-export default Input;
+export default CustomInput;

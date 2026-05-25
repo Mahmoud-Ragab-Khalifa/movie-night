@@ -1,14 +1,13 @@
 "use client";
 
 import { Button } from "@/components/Button";
-import Input from "@/components/Input";
+import CustomInput from "@/components/CustomInput";
 import { GoogleIcon } from "@/layout/Footer/SocialMediaIcons";
 import Link from "next/link";
 import { useActionState, useEffect } from "react";
 import { signUp } from "../../_actions/auth";
 import { ActionState } from "@/types/actionState";
 import toast from "react-hot-toast";
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 
 const Form = () => {
   const initialState: ActionState = {
@@ -40,7 +39,7 @@ const Form = () => {
 
       <div className="grid gap-5">
         <div className="grid gap-4">
-          <Input
+          <CustomInput
             id="name"
             name="name"
             type="text"
@@ -54,7 +53,7 @@ const Form = () => {
         </div>
 
         <div className="grid gap-4">
-          <Input
+          <CustomInput
             id="email"
             name="email"
             type="email"
@@ -68,7 +67,7 @@ const Form = () => {
         </div>
 
         <div className="grid gap-4">
-          <Input
+          <CustomInput
             id="password"
             name="password"
             type="password"
@@ -82,7 +81,7 @@ const Form = () => {
         </div>
 
         <div className="grid gap-4">
-          <Input
+          <CustomInput
             id="confirm-password"
             name="confirmPassword"
             type="password"
