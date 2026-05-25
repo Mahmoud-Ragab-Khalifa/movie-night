@@ -38,63 +38,41 @@ const Form = () => {
       <p className="text-sm mt-5 mb-8 text-neutral-400 text-center">{`Let's Get Started With Free Plan`}</p>
 
       <div className="grid gap-5">
-        <div className="grid gap-4">
-          <CustomInput
-            id="name"
-            name="name"
-            type="text"
-            label="Name"
-            defaultValue={state.formData?.get("name") as string}
-          />
+        <CustomInput
+          id="name"
+          name="name"
+          type="text"
+          label="Name"
+          error={state.errors?.name}
+          defaultValue={state.formData?.get("name") as string}
+        />
 
-          {state.errors?.name && (
-            <p className="text-red-500 text-sm">{state.errors?.name}</p>
-          )}
-        </div>
+        <CustomInput
+          id="email"
+          name="email"
+          type="email"
+          label="Email"
+          error={state.errors?.email}
+          defaultValue={state.formData?.get("email") as string}
+        />
 
-        <div className="grid gap-4">
-          <CustomInput
-            id="email"
-            name="email"
-            type="email"
-            label="Email"
-            defaultValue={state.formData?.get("email") as string}
-          />
+        <CustomInput
+          id="password"
+          name="password"
+          type="password"
+          label="Password"
+          error={state.errors?.password}
+          defaultValue={state.formData?.get("password") as string}
+        />
 
-          {state.errors?.email && (
-            <p className="text-red-500 text-sm">{state.errors?.email}</p>
-          )}
-        </div>
-
-        <div className="grid gap-4">
-          <CustomInput
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
-            defaultValue={state.formData?.get("password") as string}
-          />
-
-          {state.errors?.password && (
-            <p className="text-red-500 text-sm">{state.errors?.password}</p>
-          )}
-        </div>
-
-        <div className="grid gap-4">
-          <CustomInput
-            id="confirm-password"
-            name="confirmPassword"
-            type="password"
-            label="Confirm Password"
-            defaultValue={state.formData?.get("confirmPassword") as string}
-          />
-
-          {state.errors?.confirmPassword && (
-            <p className="text-red-500 text-sm">
-              {state.errors?.confirmPassword}
-            </p>
-          )}
-        </div>
+        <CustomInput
+          id="confirm-password"
+          name="confirmPassword"
+          type="password"
+          label="Confirm Password"
+          error={state.errors?.confirmPassword}
+          defaultValue={state.formData?.get("confirmPassword") as string}
+        />
       </div>
 
       <Button
