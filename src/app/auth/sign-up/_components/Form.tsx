@@ -8,8 +8,11 @@ import { useActionState, useEffect } from "react";
 import { signUp } from "../../_actions/auth";
 import { ActionState } from "@/types/actionState";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Form = () => {
+  const router = useRouter();
+
   const initialState: ActionState = {
     errors: {},
     message: "",
@@ -23,11 +26,13 @@ const Form = () => {
     if (state && state.message && state.status && !pending) {
       if (state.status === 201) {
         toast.success(state.message);
+
+        router.replace("/profile");
       } else {
         toast.error(state.message);
       }
     }
-  }, [pending, state]);
+  }, [pending, router, state]);
 
   return (
     <form action={action}>

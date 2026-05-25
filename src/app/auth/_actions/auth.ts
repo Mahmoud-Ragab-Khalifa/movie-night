@@ -37,8 +37,7 @@ export const signUp = async (prevState: unknown, formData: FormData) => {
 
     return {
       status: 201,
-      message:
-        "Welcome, Your Account Created Sucessfully, Check Your Inbox To Confirm Your Account",
+      message: "Welcome, Your Account Created Sucessfully",
     };
   } catch (error) {
     console.error(error);
