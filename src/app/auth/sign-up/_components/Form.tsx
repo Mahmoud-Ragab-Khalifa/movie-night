@@ -4,8 +4,20 @@ import { Button } from "@/components/Button";
 import Input from "@/components/Input";
 import { GoogleIcon } from "@/layout/Footer/SocialMediaIcons";
 import Link from "next/link";
+import { useActionState } from "react";
+import { signUp } from "../../_actions/auth";
+import { ActionState } from "@/types/actionState";
 
 const Form = () => {
+  const initialState: ActionState = {
+    errors: {},
+    message: "",
+    status: null,
+    formData: null,
+  };
+
+  const [state, action, pending] = useActionState(signUp, initialState);
+
   return (
     <form action="">
       <h1 className="font-bold text-2xl text-center text-muted-foreground">
@@ -20,7 +32,7 @@ const Form = () => {
         <Input id="password" name="password" type="password" label="Password" />
         <Input
           id="confirm-password"
-          name="confirm-password"
+          name="confirmPassword"
           type="password"
           label="Confirm Password"
         />
