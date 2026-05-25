@@ -9,9 +9,12 @@ import { signUp } from "../../_actions/auth";
 import { ActionState } from "@/types/actionState";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 
 const Form = () => {
   const router = useRouter();
+
+  const supabase = getSupabaseBrowserClient();
 
   const initialState: ActionState = {
     errors: {},
@@ -22,6 +25,7 @@ const Form = () => {
 
   const [state, action, pending] = useActionState(signUp, initialState);
 
+  // Show Toast Messages And Redirect User After Signing Up Sucessfully
   useEffect(() => {
     if (state && state.message && state.status && !pending) {
       if (state.status === 201) {
@@ -33,6 +37,18 @@ const Form = () => {
       }
     }
   }, [pending, router, state]);
+
+  // Detect Any Changes In User Session If Not Found Redirect To Auth Route
+  useEffect(() => {
+    const { data: listener } = supabase.auth.onAuthStateChange((_, session) => {
+      if (!session || !session.user) {
+        router.replace("/auth/sign-in");
+      }
+    });
+
+    // Listener If Found Set Unsubscripe To Avoid Memory Leaks
+    return () => listener?.subscription.unsubscribe();
+  }, [router, supabase.auth]);
 
   return (
     <form action={action}>
