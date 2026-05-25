@@ -3,70 +3,41 @@
 import { Button } from "@/components/Button";
 import { GoogleIcon } from "@/layout/Footer/SocialMediaIcons";
 import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 const SignWithGoogleButton = ({ text }: { text: string }) => {
+  const router = useRouter();
+
   const supabase = getSupabaseBrowserClient();
 
-  const [state, setState] = useState<{
-    status: number | null;
-    message: string | null;
-    pending: boolean;
-  }>({
-    status: null,
-    message: null,
-    pending: false,
-  });
+  const [loading, setLoading] = useState(false);
 
   const handleSignWithGoogle = async () => {
-    setState((prev) => ({ ...prev, pending: true }));
-    try {
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-        options: {
-          redirectTo: `${window.location.origin}/profile`,
-          skipBrowserRedirect: false,
-        },
-      });
+    if (loading) return;
 
-      if (error) {
-        setState((prev) => ({
-          ...prev,
-          status: error.status as number,
-          message: error.message,
-        }));
-        return;
-      }
+    setLoading(true);
 
-      setState((prev) => ({
-        ...prev,
-        status: 200,
-        message: "Welcome Signing In Is Created Successfully",
-      }));
-    } catch (error) {
-      console.error(error);
-
-      setState((prev) => ({
-        ...prev,
-        status: 500,
-        message: "Unexpected Error Check Your Connection",
-      }));
-    } finally {
-      setState((prev) => ({ ...prev, pending: false }));
-    }
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/sign-in`,
+      },
+    });
   };
 
-  // Show Toast Messages
   useEffect(() => {
-    if (state && state.status && state.message && !state.pending) {
-      if (state.status === 200) {
-        toast.success(state.message);
-      } else {
-        toast.error(state.message);
-      }
-    }
-  }, [state]);
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN" && session && session.user) {
+          router.replace("/profile");
+        }
+      },
+    );
+
+    // Listener If Found Set Unsubscripe To Avoid Memory Leaks
+    return () => listener?.subscription.unsubscribe();
+  }, [router, supabase.auth]);
 
   return (
     <Button
@@ -74,10 +45,10 @@ const SignWithGoogleButton = ({ text }: { text: string }) => {
       className="w-full bg-transparent ring-muted! shadow-muted! hover:bg-surface"
       size="default"
       onClick={handleSignWithGoogle}
-      disabled={state.pending}
+      disabled={loading}
     >
       <GoogleIcon />
-      <span>{state.pending ? "Signing..." : `${text}`}</span>
+      <span>{loading ? "Signing..." : `${text}`}</span>
     </Button>
   );
 };

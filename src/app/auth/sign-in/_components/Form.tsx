@@ -2,13 +2,13 @@
 
 import { Button } from "@/components/Button";
 import CustomInput from "@/components/CustomInput";
-import { GoogleIcon } from "@/layout/Footer/SocialMediaIcons";
 import Link from "next/link";
 import { useActionState, useEffect } from "react";
 import { SignIn } from "../../_actions/auth";
 import { ActionState } from "@/types/actionState";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import SignWithGoogleButton from "../../_components/SignWithGoogleButton";
 
 const Form = () => {
   const router = useRouter();
@@ -88,14 +88,7 @@ const Form = () => {
         </span>
       </div>
 
-      <Button
-        type="button"
-        className="w-full bg-transparent ring-muted! shadow-muted! hover:bg-surface"
-        size="default"
-      >
-        <GoogleIcon />
-        <span>Sign In With Google</span>
-      </Button>
+      <SignWithGoogleButton text="Sign In With Google" />
     </form>
   );
 };
