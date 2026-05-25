@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
+import ReactToastProvider from "@/providers/ReactToastProvider";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -28,13 +29,15 @@ export default function RootLayout({
       className={`${roboto.variable} antialiased`}
     >
       <body>
-        <Header />
+        <ReactToastProvider>
+          <Header />
 
-        {children}
+          {children}
 
-        <Footer />
+          <Footer />
 
-        <ScrollToTop />
+          <ScrollToTop />
+        </ReactToastProvider>
       </body>
     </html>
   );

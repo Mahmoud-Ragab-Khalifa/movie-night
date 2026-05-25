@@ -24,7 +24,7 @@ export const signUp = async (prevState: unknown, formData: FormData) => {
         data: {
           userName: result.data.name,
         },
-        emailRedirectTo: `${window.location.origin}/profile`,
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_Environment_BASE_URL}/profile`,
       },
     });
 
@@ -37,7 +37,8 @@ export const signUp = async (prevState: unknown, formData: FormData) => {
 
     return {
       status: 201,
-      message: "Welcome, Your Account Created Sucessfully",
+      message:
+        "Welcome, Your Account Created Sucessfully, Check Your Inbox To Confirm Your Account",
     };
   } catch (error) {
     console.error(error);
