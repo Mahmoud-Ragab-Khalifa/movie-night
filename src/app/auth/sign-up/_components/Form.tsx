@@ -38,18 +38,6 @@ const Form = () => {
     }
   }, [pending, router, state]);
 
-  // Detect Any Changes In User Session If Not Found Redirect To Auth Route
-  useEffect(() => {
-    const { data: listener } = supabase.auth.onAuthStateChange((_, session) => {
-      if (!session || !session.user) {
-        router.replace("/auth/sign-in");
-      }
-    });
-
-    // Listener If Found Set Unsubscripe To Avoid Memory Leaks
-    return () => listener?.subscription.unsubscribe();
-  }, [router, supabase.auth]);
-
   return (
     <form action={action}>
       <h1 className="font-bold text-2xl text-center text-muted-foreground">
