@@ -9,12 +9,9 @@ import { signUp } from "../../_actions/auth";
 import { ActionState } from "@/types/actionState";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { getSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 
 const Form = () => {
   const router = useRouter();
-
-  const supabase = getSupabaseBrowserClient();
 
   const initialState: ActionState = {
     errors: {},
