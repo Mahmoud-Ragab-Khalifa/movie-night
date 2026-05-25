@@ -20,3 +20,12 @@ export const signUpSchema = z
     message: "Passwords Are Not The Same",
     path: ["confirmPassword"],
   });
+
+export const signInSchema = z.object({
+  email: z.string().trim().email({ message: "Email Address Is Required" }),
+
+  password: z
+    .string()
+    .min(6, { message: "Password Must Be More Than 6 Characters" })
+    .max(40, { message: "Password Must Be Less Than 40 Characters" }),
+});
