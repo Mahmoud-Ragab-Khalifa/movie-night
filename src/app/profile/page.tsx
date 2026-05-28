@@ -6,8 +6,6 @@ const ProfilePage = async () => {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(user);
-
   return (
     <section className="flex flex-col gap-5">
       <div className="grid gap-0.5">
