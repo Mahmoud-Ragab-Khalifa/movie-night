@@ -9,7 +9,7 @@ const Settings = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-full max-w-xs glass rounded-lg p-4 ring-2 ring-muted shadow-lg shadow-surface flex flex-col gap-5">
+    <div className="w-full md:max-w-xs glass rounded-lg p-4 ring-2 ring-muted shadow-lg shadow-surface flex flex-col gap-5">
       {settingsList.map((link) => (
         <Link
           key={link.href}
