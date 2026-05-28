@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "./Logo";
 import Navbar from "./Navbar";
 import SearchBar from "./SearchBar";
@@ -44,15 +44,11 @@ const Header = () => {
             <Search size={22} />
           </button>
 
-          <Suspense>
-            <Navbar />
-          </Suspense>
+          <Navbar />
         </div>
 
         <div className="hidden sm:block">
-          <Suspense>
-            <Navbar />
-          </Suspense>
+          <Navbar />
         </div>
 
         <div className="hidden lg:block">

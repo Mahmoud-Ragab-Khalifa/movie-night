@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { navigationLinks } from "@/constants/navigationLinks";
 import { Menu, X } from "lucide-react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -30,23 +30,7 @@ const Navbar = () => {
     };
   }, [isMobileMenuOpen]);
 
-  // Handle Navigation Links Active State
-
-  const searchParams = useSearchParams();
-  const activeLink =
-    searchParams.get("section") === "browse-by-genre"
-      ? "home"
-      : (searchParams.get("section") ?? "home");
-
-  // Handle Clicking on Home Navigation Link To Work As scroll to top
-
   const pathname = usePathname();
-
-  const handleClickToHomeLink = (href: string) => {
-    if (href === "#home" && pathname === "/") {
-      return window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
 
   return (
     <nav>
@@ -55,23 +39,15 @@ const Navbar = () => {
       <div className="hidden lg:flex items-center gap-1 glass rounded-full px-1 xl:px-2 py-1 ring-2 ring-muted shadow-lg shadow-surface">
         {navigationLinks.map((item) => (
           <Link
-            key={item.href}
-            href={
-              item.href === "#profile"
-                ? `/profile?section=${item.href.slice(1)}`
-                : `/?section=${item.href.slice(1)}${item.href}`
-            }
-            className={`${activeLink === item.href.slice(1) && (pathname === "/" || pathname === "/profile") ? "text-foreground" : "text-muted-foreground"} px-4 py-2 text-sm transition-all duration-300 hover:text-foreground hover:bg-surface rounded-full relative`}
-            onClick={() => {
-              handleClickToHomeLink(item.href);
-            }}
+            key={item.label}
+            href={item.href}
+            className={`${pathname === item.href ? "text-foreground" : "text-muted-foreground"} px-4 py-2 text-sm transition-all duration-300 hover:text-foreground hover:bg-surface rounded-full relative`}
           >
             {item.label}
 
-            {activeLink === item.href.slice(1) &&
-              (pathname === "/" || pathname === "/profile") && (
-                <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-3/5 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
-              )}
+            {pathname === item.href && (
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-0 w-3/5 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
+            )}
           </Link>
         ))}
       </div>
@@ -93,24 +69,18 @@ const Navbar = () => {
           <div className="container grid gap-4">
             {navigationLinks.map((item) => (
               <Link
-                key={item.href}
-                href={
-                  item.href === "#profile"
-                    ? `/profile?section=${item.href.slice(1)}`
-                    : `/?section=${item.href.slice(1)}${item.href}`
-                }
+                key={item.label}
+                href={item.href}
                 onClick={() => {
                   setIsMobileMenuOpen(false);
-                  handleClickToHomeLink(item.href);
                 }}
-                className={`${activeLink === item.href.slice(1) && (pathname === "/" || pathname === "/profile") ? "text-foreground" : "text-muted-foreground"} text-lg active:text-foreground hover:text-foreground transition-colors duration-300 py-2 nth-[1]:pt-0 relative`}
+                className={`${pathname === item.href ? "text-foreground" : "text-muted-foreground"} text-lg active:text-foreground hover:text-foreground transition-colors duration-300 py-2 nth-[1]:pt-0 relative`}
               >
                 {item.label}
 
-                {activeLink === item.href.slice(1) &&
-                  (pathname === "/" || pathname === "/profile") && (
-                    <div className="absolute left-0 bottom-0 w-15 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
-                  )}
+                {pathname === item.href && (
+                  <div className="absolute left-0 bottom-0 w-15 h-1 bg-linear-to-r from-primary via-primary/60 to-transparent rounded-full shadow-2xl shadow-primary transition-all duration-500" />
+                )}
               </Link>
             ))}
           </div>
