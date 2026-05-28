@@ -1,12 +1,6 @@
 import Link from "next/link";
 import SignOutButton from "./SignOutButton";
-
-const settingsList = [
-  { href: "/profile", label: "Profile" },
-  { href: "/watch-list", label: "Watch List" },
-  { href: "/favourites", label: "Favourites" },
-  { href: "/update-profile", label: "Update Profile" },
-];
+import { settingsList } from "@/constants/profileSettings";
 
 const Settings = () => {
   return (
