@@ -1,7 +1,10 @@
+import { addUserProfile } from "@/server/db/addUserProfile";
 import { getCurrentUser } from "@/server/db/getCurrentUser";
 
 const ProfilePage = async () => {
   const user = await getCurrentUser();
+
+  if (user) await addUserProfile(user);
 
   return (
     <section className="flex flex-col gap-5">
