@@ -6,5 +6,5 @@ export const updateProfileSchema = z.object({
   fullName: z.string().trim().optional(),
   phone: z.string().trim().optional(),
   bio: z.string().trim().optional(),
-  image: z.string().trim().optional(),
+  image: z.custom((val) => val instanceof File).optional(),
 });

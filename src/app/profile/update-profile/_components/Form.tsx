@@ -30,7 +30,10 @@ const Form = ({ userProfile }: { userProfile: UserProfile }) => {
     errors: {},
   };
 
-  const [state, action, pending] = useActionState(updateProfile, initialState);
+  const [state, action, pending] = useActionState(
+    updateProfile.bind(null, userProfile.id),
+    initialState,
+  );
 
   useEffect(() => {
     if (state && state.message && state.status && !pending) {
@@ -108,7 +111,7 @@ const Form = ({ userProfile }: { userProfile: UserProfile }) => {
           {selectedImage && (
             <Image
               src={selectedImage}
-              alt={userProfile.user_name!}
+              alt="user"
               fill
               sizes="200px"
               className="object-cover object-center"
