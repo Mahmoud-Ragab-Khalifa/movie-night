@@ -1,10 +1,7 @@
-import { createSupabaseServerClient } from "@/lib/supabase/server-client";
+import { getCurrentUser } from "@/server/db/getCurrentUser";
 
 const ProfilePage = async () => {
-  const supabase = await createSupabaseServerClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
   return (
     <section className="flex flex-col gap-5">
