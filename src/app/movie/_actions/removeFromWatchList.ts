@@ -3,11 +3,10 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { getCurrentUser } from "@/server/db/getCurrentUser";
 import { isMovieInWatchList } from "@/server/db/isMovieInWatchList";
-import { MovieDetails } from "@/types/tmdb";
 import { revalidatePath } from "next/cache";
 
-export const removeFromWatchList = async (movie: MovieDetails) => {
-  if (!movie) {
+export const removeFromWatchList = async (movieId: number) => {
+  if (!movieId) {
     return {
       status: 400,
       message: "Movie Is Not Found",
@@ -24,7 +23,7 @@ export const removeFromWatchList = async (movie: MovieDetails) => {
       };
     }
 
-    const isInWatchList = await isMovieInWatchList(movie.id);
+    const isInWatchList = await isMovieInWatchList(movieId);
 
     if (!isInWatchList) {
       return {
@@ -39,7 +38,7 @@ export const removeFromWatchList = async (movie: MovieDetails) => {
       .from("watchlist")
       .delete()
       .eq("user_id", currentUser.id)
-      .eq("movie_id", movie.id);
+      .eq("movie_id", movieId);
 
     if (error) {
       return {
@@ -48,7 +47,7 @@ export const removeFromWatchList = async (movie: MovieDetails) => {
       };
     }
 
-    revalidatePath(`/movie/${movie.id}/details`);
+    revalidatePath(`/movie/${movieId}/details`);
     revalidatePath("/profile/watch-list");
 
     return {

@@ -16,7 +16,7 @@ const WatchListButton = ({
 }) => {
   const handleClick = async () => {
     if (isMovieInWatchList) {
-      const result = await removeFromWatchList(movie);
+      const result = await removeFromWatchList(movie.id);
 
       if (result.status && result.message) {
         if (result.status === 200) {
