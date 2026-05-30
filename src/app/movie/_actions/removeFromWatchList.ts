@@ -1,3 +1,5 @@
+"use server";
+
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { getCurrentUser } from "@/server/db/getCurrentUser";
 import { MovieDetails } from "@/types/tmdb";
