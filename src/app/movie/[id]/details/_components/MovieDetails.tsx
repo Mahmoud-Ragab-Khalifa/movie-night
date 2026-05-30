@@ -1,17 +1,13 @@
-"use client";
-
-import { Button } from "@/components/Button";
 import { formatRuntime } from "@/lib/formatRuntime";
 import { MovieDetails as MovieDetailsType, MovieVideo } from "@/types/tmdb";
-import { BadgePlus, StarIcon } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import Image from "next/image";
 import DetailsBlock from "./DetailsBlock";
 import { formatMoney } from "@/lib/formatMoney";
 import { getImageUrl } from "@/lib/getImageUrl";
 import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
-import { addToWatchList } from "@/app/movie/_actions/addToWatchList";
-import toast from "react-hot-toast";
+import AddToWatchListButton from "./AddToWatchListButton";
 
 const MovieDetails = ({
   movie,
@@ -78,24 +74,7 @@ const MovieDetails = ({
               <MovieTrailerModal movieTrailer={movieTrailer} />
             </div>
 
-            <Button
-              size="sm"
-              className="bg-secondary! ring-neutral-700! shadow-neutral-950! hover:bg-secondary/80! animate-fade-in-lg animation-delay-800"
-              onClick={async () => {
-                const result = await addToWatchList(movie);
-
-                if (result.status && result.message) {
-                  if (result.status === 200) {
-                    toast.success(result.message);
-                  } else {
-                    toast.error(result.message);
-                  }
-                }
-              }}
-            >
-              <BadgePlus size={18} className="text-blue-500" />
-              <span>Add To Watchlist</span>
-            </Button>
+            <AddToWatchListButton movie={movie} />
           </div>
         </div>
       </div>
