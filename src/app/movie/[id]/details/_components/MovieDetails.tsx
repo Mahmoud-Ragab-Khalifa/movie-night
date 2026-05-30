@@ -9,6 +9,7 @@ import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
 import WatchListButton from "./WatchListButton";
 import { isMovieInWatchList } from "@/server/db/isMovieInWatchList";
+import FavouriteButton from "./FavouriteButton";
 
 const MovieDetails = async ({
   movie,
@@ -37,6 +38,8 @@ const MovieDetails = async ({
           />
 
           <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/70 to-black/90" />
+
+          <FavouriteButton movie={movie} />
         </div>
 
         <div>
