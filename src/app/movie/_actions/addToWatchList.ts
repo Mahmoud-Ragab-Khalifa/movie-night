@@ -2,6 +2,7 @@
 
 import { createSupabaseServerClient } from "@/lib/supabase/server-client";
 import { getCurrentUser } from "@/server/db/getCurrentUser";
+import { isMovieInWatchList } from "@/server/db/isMovieInWatchList";
 import { MovieDetails } from "@/types/tmdb";
 import { revalidatePath } from "next/cache";
 
@@ -20,6 +21,15 @@ export const addToWatchList = async (movie: MovieDetails) => {
       return {
         status: 400,
         message: "User Is Not Found",
+      };
+    }
+
+    const isInWatchList = await isMovieInWatchList(movie.id);
+
+    if (isInWatchList) {
+      return {
+        status: 400,
+        message: "This Movie Already In Your Watchlist",
       };
     }
 
