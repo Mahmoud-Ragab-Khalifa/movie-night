@@ -19,7 +19,7 @@ export const removeFromWatchList = async (movieId: number) => {
     if (!currentUser) {
       return {
         status: 400,
-        message: "User Is Not Found",
+        message: "Sign In To Be Able To Add Movies In Your WatchList",
       };
     }
 
