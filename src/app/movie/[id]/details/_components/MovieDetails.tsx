@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/Button";
 import { formatRuntime } from "@/lib/formatRuntime";
 import { MovieDetails as MovieDetailsType, MovieVideo } from "@/types/tmdb";
@@ -8,6 +10,8 @@ import { formatMoney } from "@/lib/formatMoney";
 import { getImageUrl } from "@/lib/getImageUrl";
 import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
+import { addToWatchList } from "@/app/movie/_actions/addToWatchList";
+import toast from "react-hot-toast";
 
 const MovieDetails = ({
   movie,
@@ -77,6 +81,17 @@ const MovieDetails = ({
             <Button
               size="sm"
               className="bg-secondary! ring-neutral-700! shadow-neutral-950! hover:bg-secondary/80! animate-fade-in-lg animation-delay-800"
+              onClick={async () => {
+                const result = await addToWatchList(movie);
+
+                if (result.status && result.message) {
+                  if (result.status === 200) {
+                    toast.success(result.message);
+                  } else {
+                    toast.error(result.message);
+                  }
+                }
+              }}
             >
               <BadgePlus size={18} className="text-blue-500" />
               <span>Add To Watchlist</span>
