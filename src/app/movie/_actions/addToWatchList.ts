@@ -45,7 +45,7 @@ export const addToWatchList = async (movie: MovieDetails) => {
 
     return {
       status: 200,
-      message: "Movie Add To Watchlist Successfully",
+      message: "Movie Added To Watchlist Successfully",
     };
   } catch (error) {
     console.log(error);
