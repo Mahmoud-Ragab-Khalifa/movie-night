@@ -52,8 +52,8 @@ export const removeFromWatchList = async (movie: MovieDetails) => {
     revalidatePath("/profile/watch-list");
 
     return {
-      success: 200,
-      message: "Movie removed from watchlist",
+      status: 200,
+      message: "Movie removed from Your watchlist",
     };
   } catch (error) {
     console.error(error);

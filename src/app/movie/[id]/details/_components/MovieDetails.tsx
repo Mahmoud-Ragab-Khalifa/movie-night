@@ -8,14 +8,17 @@ import { getImageUrl } from "@/lib/getImageUrl";
 import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
 import WatchListButton from "./WatchListButton";
+import { isMovieInWatchList } from "@/server/db/isMovieInWatchList";
 
-const MovieDetails = ({
+const MovieDetails = async ({
   movie,
   movieTrailer,
 }: {
   movie: MovieDetailsType;
   movieTrailer: MovieVideo;
 }) => {
+  const isInWatchList = await isMovieInWatchList(movie.id);
+
   return (
     <div className="w-full max-w-5xl mx-auto">
       <div className="flex flex-col gap-5 md:flex-row">
@@ -74,7 +77,10 @@ const MovieDetails = ({
               <MovieTrailerModal movieTrailer={movieTrailer} />
             </div>
 
-            <WatchListButton movie={movie} />
+            <WatchListButton
+              movie={movie}
+              isMovieInWatchList={isInWatchList!}
+            />
           </div>
         </div>
       </div>
