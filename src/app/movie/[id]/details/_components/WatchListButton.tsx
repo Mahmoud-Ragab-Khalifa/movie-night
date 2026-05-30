@@ -6,7 +6,7 @@ import { MovieDetails } from "@/types/tmdb";
 import { BadgePlus } from "lucide-react";
 import toast from "react-hot-toast";
 
-const AddToWatchListButton = ({ movie }: { movie: MovieDetails }) => {
+const WatchListButton = ({ movie }: { movie: MovieDetails }) => {
   const handleAddingToWatchList = async () => {
     const result = await addToWatchList(movie);
 
@@ -31,4 +31,4 @@ const AddToWatchListButton = ({ movie }: { movie: MovieDetails }) => {
   );
 };
 
-export default AddToWatchListButton;
+export default WatchListButton;

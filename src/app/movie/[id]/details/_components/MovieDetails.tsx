@@ -7,7 +7,7 @@ import { formatMoney } from "@/lib/formatMoney";
 import { getImageUrl } from "@/lib/getImageUrl";
 import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import MovieTrailerModal from "@/components/MovieTrailerModal";
-import AddToWatchListButton from "./AddToWatchListButton";
+import WatchListButton from "./WatchListButton";
 
 const MovieDetails = ({
   movie,
@@ -74,7 +74,7 @@ const MovieDetails = ({
               <MovieTrailerModal movieTrailer={movieTrailer} />
             </div>
 
-            <AddToWatchListButton movie={movie} />
+            <WatchListButton movie={movie} />
           </div>
         </div>
       </div>
