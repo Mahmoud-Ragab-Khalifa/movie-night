@@ -7,7 +7,7 @@ import { BadgePlus } from "lucide-react";
 import toast from "react-hot-toast";
 
 const WatchListButton = ({ movie }: { movie: MovieDetails }) => {
-  const handleAddingToWatchList = async () => {
+  const handleClick = async () => {
     const result = await addToWatchList(movie);
 
     if (result.status && result.message) {
@@ -23,7 +23,7 @@ const WatchListButton = ({ movie }: { movie: MovieDetails }) => {
     <Button
       size="sm"
       className="bg-secondary! ring-neutral-700! shadow-neutral-950! hover:bg-secondary/80! animate-fade-in-lg animation-delay-800"
-      onClick={handleAddingToWatchList}
+      onClick={handleClick}
     >
       <BadgePlus size={18} className="text-blue-500" />
       <span>Add To Watchlist</span>
