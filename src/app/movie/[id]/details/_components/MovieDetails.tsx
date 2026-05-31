@@ -10,6 +10,7 @@ import MovieTrailerModal from "@/components/MovieTrailerModal";
 import WatchListButton from "./WatchListButton";
 import { isMovieInWatchList } from "@/server/db/isMovieInWatchList";
 import FavouriteButton from "./FavouriteButton";
+import { isMovieInFavourites } from "@/server/db/isMovieInFavourites";
 
 const MovieDetails = async ({
   movie,
@@ -19,6 +20,8 @@ const MovieDetails = async ({
   movieTrailer: MovieVideo;
 }) => {
   const isInWatchList = await isMovieInWatchList(movie.id);
+
+  const isInFavourites = await isMovieInFavourites(movie.id);
 
   return (
     <div className="w-full max-w-5xl mx-auto">
@@ -39,7 +42,7 @@ const MovieDetails = async ({
 
           <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/70 to-black/90" />
 
-          <FavouriteButton movie={movie} />
+          <FavouriteButton movie={movie} isInFavourites={isInFavourites!} />
         </div>
 
         <div>
