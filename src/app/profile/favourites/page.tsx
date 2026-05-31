@@ -1,10 +1,11 @@
 import { getImageUrl } from "@/lib/getImageUrl";
 import { ImageSizes, ImageTypes } from "@/types/imageSizes";
 import { WatchListMovie as FavouritesMovie } from "@/types/watchListMovie";
-import { StarIcon, Trash2 } from "lucide-react";
+import { StarIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getFavouritesMovies } from "@/server/db/getFavouritesMovies";
+import RemoveFromFavouritesButton from "./_components/RemoveFromFavouritesButton";
 
 const FavouritesPage = async () => {
   const watchListMovies: FavouritesMovie[] | undefined =
@@ -51,9 +52,7 @@ const FavouritesPage = async () => {
               </div>
             </Link>
 
-            <button className="fully-rounded-btn bg-red-500 transition-all duration-300 ring-2 ring-red-600 hover:ring-red-700">
-              <Trash2 size={18} />
-            </button>
+            <RemoveFromFavouritesButton movieId={movie.movie_id} />
           </div>
         ))
       ) : (
